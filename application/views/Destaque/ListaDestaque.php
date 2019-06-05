@@ -8,7 +8,32 @@
     </div>
     <hr>
     <div class="form-row">
-        <p class="col-md-6">Valor:  </p>
+        <p class="col-md-6">Valor: </p>
         <a href="#" class="btn btn-danger col-md-6" id="buscar">DETALHES</a>
     </div>
+</div>
+<div class="card col-md-3">
+    <img src="../ImobiliariaCI/Imagens/slide.jpg" class="card-img-top" alt="...">
+    <div class="card-body">
+        <p class="card-text">Categoria:</p>
+        <p class="card-text">Bairro:</p>
+    </div>
+    <hr>
+    <div class="form-row">
+        <p class="col-md-6">Valor: </p>
+        <a href="#" class="btn btn-danger col-md-6" id="buscar">DETALHES</a>
+    </div>
+</div>
+<div class="card col-md-3">
+    <img src="../ImobiliariaCI/Imagens/slide.jpg" class="card-img-top" alt="...">
+    <div class="card-body">
+        <p class="card-text">Categoria:</p>
+        <p class="card-text">Bairro:</p>
+    </div>
+    <hr>
+    <div class="form-row">
+        <p class="col-md-6">Valor: </p>
+        <a href="#" class="btn btn-danger col-md-6" id="buscar">DETALHES</a>
+    </div>
+</div>
 </div>
