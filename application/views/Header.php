@@ -62,77 +62,117 @@
                 <div class="card">
                     <h5 class="card-header bg-danger text-light">BUSCAR IMÓVEL</h5>
                     <div class="card-body">
-                        <div class="form-row">
-                            <div class="col-md-3">
-                                <label for="operador">Operador</label><br>
-                                <select id="operador" class="form-control">
-                                    <option></option>
-                                </select>
-                            </div>
+                        <div action="" method="POST">
+                            <input type="hidden" name="id" value="<?= (isset($imovel)) ? $imovel->id : ''; ?>">
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <label for="id_operador">Operador</label><br>
+                                    <select id="id_operador" class="form-control" name="id_operador">
+                                        <option selected>Selecione um Operador...</option>
+                                        <?php
+                                        foreach ($operadores as $key => $o) {
+                                            ?> 
 
-                            <div class="col-md-3">
-                                <label for="cidade">Cidade</label><br>
-                                <select id="cidade" class="form-control">
-                                    <option></option>
-                                </select>
-                            </div>
+                                            <option value="<?= $o->id ?>"><?= $o->cd_operador ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
+                                </div>
 
-                            <div class="col-md-3">
-                                <label for="">Categoria</label><br>
-                                <select id="" class="form-control">
-                                    <option></option>
-                                </select>
-                            </div>
+                                <div class="col-md-3">
+                                    <label for="id_cidade">Cidade</label><br>
+                                    <select id="id_cidade" class="form-control" name="id_cidade">
+                                        <option selected>Selecione uma Cidade...</option>
+                                        <?php
+                                        foreach ($cidades as $key => $ci) {
+                                            ?> 
 
-                            <div class="col-md-3">
-                                <label for="">Bairro</label><br>
-                                <select id="" class="form-control">
-                                    <option></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row" style="margin-top: 10px;">
-                            <div class="col-md-3">
-                                <label for="">Dormitórios</label><br>
-                                <select id="" class="form-control">
-                                    <option></option>
-                                </select>
-                            </div>
+                                            <option value="<?= $ci->id ?>"><?= $ci->cd_cidade ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
+                                </div>
 
-                            <div class="col-md-3">
-                                <label for="">Banheiros</label><br>
-                                <select id="" class="form-control">
-                                    <option></option>
-                                </select>
-                            </div>
+                                <div class="col-md-3">
+                                    <label for="id_categoria">Categoria</label><br>
+                                    <select id="id_categoria" class="form-control" name="id_categoria">
+                                        <option selected>Selecione uma Categoria...</option>
+                                        <?php
+                                        foreach ($categorias as $key => $ca) {
+                                            ?> 
 
-                            <div class="col-md-2">
-                                <label for="">Garagem</label><br>
-                                <select id="" class="form-control">
-                                    <option></option>
-                                </select>
-                            </div>
+                                            <option value="<?= $ca->id ?>"><?= $ca->cd_categoria ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
+                                </div>
 
-                            <div class="col-md-2">
-                                <label for="">Valor Mínimo</label><br>
-                                <select id="" class="form-control">
-                                    <option></option>
-                                </select>
-                            </div>
+                                <div class="col-md-3">
+                                    <label for="">Bairro</label><br>
+                                    <select id="" class="form-control" name="id_bairro">
+                                        <option selected>Selecione um Bairro...</option>
+                                        <?php
+                                        foreach ($bairros as $key => $b) {
+                                            ?> 
 
-                            <div class="col-md-2">
-                                <label for="">Valor máximo</label><br>
-                                <select id="" class="form-control">
-                                    <option></option>
-                                </select>
+                                            <option value="<?= $b->id ?>"><?= $b->cd_bairro ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
+                            <div class="form-row" style="margin-top: 10px;">
+                                <div class="col-md-3">
+                                    <label for="">Dormitórios</label><br>
+                                    <select id="" class="form-control" name="qtd_dormitorio">
+                                        <option selected>Selecione o N° de Dormitórios...</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3 ou mais</option>
+                                    </select>
+                                </div>
 
+                                <div class="col-md-3">
+                                    <label for="qtd_banheiro">Banheiros</label><br>
+                                    <select id="qtd_banheiro" class="form-control" name="qtd_banheiro">
+                                        <option selected>Selecione o N° de Banheiros...</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3 ou mais</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label for="qtd_garagem">Garagem</label><br>
+                                    <select id="qtd_garagem" class="form-control" name="qtd_garagem">
+                                        <option selected>Selecione o N° de Garagens...</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3 ou mais</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label for="vlminimo">Valor Mínimo</label><br>
+                                    <select id="vlminimo" class="form-control" name="vlminimo">
+                                        <option></option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label for="vlmaximo">Valor máximo</label><br>
+                                    <select id="vlmaximo" class="form-control" name="vlmaximo">
+                                        <option></option>
+                                    </select>
+                                </div>
+
+                            </div>
                         </div>
                         <div class="text-center">
-                        <a href="#" class="btn btn-danger col-md-3" id="buscar" style="margin-top: 10px;">BUSCAR</a>
+                            <a href="#" class="btn btn-danger col-md-3" id="buscar" style="margin-top: 10px;">BUSCAR</a>
                         </div>
                     </div>
                 </div>
             </div>
-      
+
 

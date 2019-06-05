@@ -8,7 +8,7 @@
     </div>
     <hr>
     <div class="form-row">
-        <p class="col-md-6">Valor: bla </p>
+        <p class="col-md-6">Valor:  </p>
         <a href="#" class="btn btn-danger col-md-6" id="buscar">DETALHES</a>
     </div>
 </div>

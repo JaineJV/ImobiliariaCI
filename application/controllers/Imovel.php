@@ -23,6 +23,47 @@ class Imovel extends CI_Controller {
         $this->load->view('Destaque/ListaDestaque', $data);
         $this->load->view('Footer');
     }
+    
+    public function buscar() {
+        $this->form_validation->set_rules('id_operador', 'id_operador', 'required');
+        $this->form_validation->set_rules('id_cidade', 'id_cidade', 'required');
+        $this->form_validation->set_rules('id_categoria', 'id_categoria', 'required');
+        $this->form_validation->set_rules('id_bairro', 'id_bairro', 'required');
+
+        if ($this->form_validation->run() == false) {
+
+            $this->load->model('Operador_model', 'om');
+            $data['operadores'] = $this->om->getAll();
+
+            $this->load->model('Cidade_model', 'cim');
+            $data['cidades'] = $this->cim->getAll();
+
+            $this->load->model('Categoria_model', 'cam');
+            $data['categorias'] = $this->cam->getAll();
+            
+            $this->load->model('Bairro_model', 'bm');
+            $data['bairros'] = $this->bm->getAll();
+
+            $this->load->view('Header', $data);
+            $this->load->view('Footer');
+        } else {
+           
+            $data = array(
+                'id_operador' => $this->input->post('id_operador'),
+                'id_cidade' => $this->input->post('id_cidade'),
+                'id_categoria' => $this->input->post('id_categoria'),
+                'id_bairro' => $this->input->post('id_bairro'),
+                'qtd_dormitorio' => $this->input->post('qtd_dormitorio'),
+                'qtd_banheiro' => $this->input->post('qtd_banheiro'),
+                'qtd_garagem' => $this->input->post('qtd_garagem')
+            );
+            if ($this->Imovel_model->select($data)) {
+
+                
+            } 
+        }
+    }
+
 
     public function cadastrar() {
         $this->form_validation->set_rules('numero_garagem', 'numero_garagem', 'required');
