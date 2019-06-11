@@ -9,7 +9,6 @@ class Operador extends CI_Controller {
         
         $this->load->model('Imovel_model');
         $this->load->model('Operador_model');
-        $this->Usuario_model->verificaLogin();
     }
 
     public function index() {
@@ -21,7 +20,7 @@ class Operador extends CI_Controller {
 
         $data['operadores'] = $this->om->getAll();
         
-        $this->load->view('Operadores/ListaOperadores', $data);
+        $this->load->view('Administrador/Operador/ListaOperadores', $data);
     }
 
     public function cadastrar() {
@@ -29,7 +28,7 @@ class Operador extends CI_Controller {
 
         if ($this->form_validation->run() == false) {
 
-            $this->load->view('Operador/ListaOperador');
+            $this->load->view('Administrador/Operador/FormOperador');
         } else {
             $data = array(
                 'tipo_operador' => $this->input->post('tipo_operador')
@@ -37,7 +36,7 @@ class Operador extends CI_Controller {
             if ($this->Operador_model->insert($data)) {
 
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-success" role="alert">Operador cadastrado com sucesso!</div>');
-                redirect('Operador/listar');
+                redirect('Admin/pagina');
             } else {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao cadastrar...</div>');
                 redirect('Operador/cadastrar');
@@ -54,7 +53,7 @@ class Operador extends CI_Controller {
 
                 $data['operador'] = $this->Operador_model->getOne($id);
                 
-                $this->load->view('Operador/FormOperador', $data);
+                $this->load->view('Administrador/Operador/FormOperador', $data);
             } else {
                 $data = array(
                     'tipo_operador' => $this->input->post('tipo_operador')

@@ -8,8 +8,7 @@ class Cidade extends CI_Controller {
         parent::__construct();
         
         $this->load->model('Imovel_model');
-        $this->load->model('Bairro_model');
-        $this->Usuario_model->verificaLogin();
+        $this->load->model('Cidade_model');
     }
 
     public function index() {
@@ -17,11 +16,11 @@ class Cidade extends CI_Controller {
     }
 
     public function listar(){
-        $this->load->model('Cidade_model', 'cim');
+        $this->load->model('Cidade_model', 'cm');
 
-        $data['cidades'] = $this->cim->getAll();
+        $data['cidades'] = $this->cm->getAll();
         
-        $this->load->view('Cidade/ListaCidades', $data);
+        $this->load->view('Administrador/Cidade/ListaCidades', $data);
     }
 
     public function cadastrar() {
@@ -29,7 +28,7 @@ class Cidade extends CI_Controller {
 
         if ($this->form_validation->run() == false) {
             
-            $this->load->view('Cidade/FormCidade');
+            $this->load->view('Administrador/Cidade/FormCidade');
         } else {
             $data = array(
                 'nome_cidade' => $this->input->post('nome_cidade')
@@ -37,7 +36,7 @@ class Cidade extends CI_Controller {
             if ($this->Cidade_model->insert($data)) {
 
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-success" role="alert">Cidade cadastrada com sucesso!</div>');
-                redirect('Cidade/listar');
+                redirect('Admin/pagina');
             } else {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao cadastrar...</div>');
                 redirect('Cidade/cadastrar');
@@ -54,7 +53,7 @@ class Cidade extends CI_Controller {
 
                 $data['cidade'] = $this->Cidade_model->getOne($id);
                 
-                $this->load->view('Cidade/FormCidade', $data);
+                $this->load->view('Administrador/Cidade/FormCidade', $data);
             } else {
                 $data = array(
                     'nome_cidade' => $this->input->post('nome_cidade')
@@ -62,9 +61,9 @@ class Cidade extends CI_Controller {
 
                 if ($this->Cidade_model->update($id, $data)) {
                     $this->session->set_flashdata('mensagem', '<div class="alert alert-success" role="alert">Cidade alterada com sucesso!</div>');
-                    redirect('Cidade/listar');
+                    redirect('Admin/pagina');
                 } else {
-                    $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao alterar...</div>');
+                    $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao alterar ...</div>');
                     redirect('Cidade/alterar/' . $id);
                 }
             }
@@ -82,9 +81,9 @@ class Cidade extends CI_Controller {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao deletar...</div>');
             }
             
-            redirect('Cidade/listar');
+            redirect('Admin/pagina');
         }
-        redirect('Cidade/listar');
+        redirect('Admin/pagina');
     }
 
 }

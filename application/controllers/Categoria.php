@@ -9,7 +9,6 @@ class Categoria extends CI_Controller {
         
         $this->load->model('Imovel_model');
         $this->load->model('Categoria_model');
-        $this->Usuario_model->verificaLogin();
     }
 
     public function index() {
@@ -21,7 +20,7 @@ class Categoria extends CI_Controller {
 
         $data['categorias'] = $this->cam->getAll();
         
-        $this->load->view('Categoria/ListaCategorias', $data);
+        $this->load->view('Administrador/Categoria/ListaCategorias', $data);
     }
 
     public function cadastrar() {
@@ -29,9 +28,7 @@ class Categoria extends CI_Controller {
 
         if ($this->form_validation->run() == false) {
             
-            $this->load->view('Header');
-            $this->load->view('Categoria/FormCategoria');
-            $this->load->view('Footer');
+            $this->load->view('Administrador/Categoria/FormCategoria');
         } else {
             $data = array(
                 'nome_categoria' => $this->input->post('nome_categoria')
@@ -39,7 +36,7 @@ class Categoria extends CI_Controller {
             if ($this->Categoria_model->insert($data)) {
 
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-success" role="alert">Categoria cadastrada com sucesso!</div>');
-                redirect('Categoria/listar');
+                redirect('Admin/pagina');
             } else {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao cadastrar...</div>');
                 redirect('Categoria/cadastrar');
@@ -56,7 +53,7 @@ class Categoria extends CI_Controller {
 
                 $data['categoria'] = $this->Categoria_model->getOne($id);
                 
-                $this->load->view('Categoria/FormCategoria', $data);
+                $this->load->view('Administrador/Categoria/FormCategoria', $data);
             } else {
                 $data = array(
                     'nome_categoria' => $this->input->post('nome_categoria')
@@ -64,7 +61,7 @@ class Categoria extends CI_Controller {
 
                 if ($this->Categoria_model->update($id, $data)) {
                     $this->session->set_flashdata('mensagem', '<div class="alert alert-success" role="alert">Categoria alterada com sucesso!</div>');
-                    redirect('Categoria/listar');
+                    redirect('Admin/pagina');
                 } else {
                     $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao alterar ...</div>');
                     redirect('Categoria/alterar/' . $id);
@@ -84,9 +81,9 @@ class Categoria extends CI_Controller {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao deletar...</div>');
             }
             
-            redirect('Categoria/listar');
+            redirect('Admin/paginar');
         }
-        redirect('Categoria/listar');
+        redirect('Admin/pagina');
     }
 
 }

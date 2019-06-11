@@ -9,7 +9,6 @@ class Bairro extends CI_Controller {
 
         $this->load->model('Imovel_model');
         $this->load->model('Bairro_model');
-        $this->Usuario_model->verificaLogin();
     }
 
     public function index() {
@@ -21,31 +20,32 @@ class Bairro extends CI_Controller {
 
         $data['bairros'] = $this->bm->getAll();
 
-        $this->load->view('Bairro/ListaBairros', $data);
+        $this->load->view('Administrador/Bairro/ListaBairros', $data);
     }
 
     public function cadastrar() {
-        $this->form_validation->set_rules('nome_bairro', 'nome_bairro', 'required');
         $this->form_validation->set_rules('cd_cidade', 'cd_cidade', 'required');
-
+        $this->form_validation->set_rules('nome_bairro', 'nome_bairro', 'required');
+        
         if ($this->form_validation->run() == false) {
             $this->load->model('Cidade_model', 'cm');
 
             $data['cidades'] = $this->cm->getAll();
 
-            $this->load->view('Bairro/FormBairro', $data);
+            $this->load->view('Administrador/Bairro/FormBairro', $data);
         } else {
             $data = array(
-                'nome_bairro' => $this->input->post('nome_bairro'),
-                'cd_cidade' => $this->input->post('cd_cidade')
+                'cd_cidade' => $this->input->post('cd_cidade'),
+                'nome_bairro' => $this->input->post('nome_bairro')
+                
             );
             if ($this->Bairro_model->insert($data)) {
 
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-success" role="alert">Bairro cadastrado com sucesso!</div>');
-                redirect('Bairro/listar');
+                redirect('Admin/pagina');
             } else {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao cadastrar...</div>');
-                redirect('Bairro/cadastrar');
+                redirect('Admin/pagina');
             }
         }
     }
@@ -53,18 +53,20 @@ class Bairro extends CI_Controller {
     public function alterar($id) {
         if ($id > 0) {
 
-            $this->form_validation->set_rules('nome_bairro', 'nome_bairro', 'required');
             $this->form_validation->set_rules('cd_cidade', 'cd_cidade', 'required');
+            $this->form_validation->set_rules('nome_bairro', 'nome_bairro', 'required');
+            
 
             if ($this->form_validation->run() == false) {
 
                 $data['bairro'] = $this->Bairro_model->getOne($id);
 
-                $this->load->view('Bairro/FormBairro', $data);
+                $this->load->view('Administrador/Bairro/FormBairro', $data);
             } else {
                 $data = array(
-                    'nome_bairro' => $this->input->post('nome_bairro'),
-                    'cd_cidade' => $this->input->post('cd_cidade')
+                    'cd_cidade' => $this->input->post('cd_cidade'),
+                    'nome_bairro' => $this->input->post('nome_bairro')
+                    
                 );
 
                 if ($this->Bairro_model->update($id, $data)) {
@@ -89,9 +91,9 @@ class Bairro extends CI_Controller {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao deletar...</div>');
             }
 
-            redirect('Bairro/listar');
+            redirect('Admin/pagina');
         }
-        redirect('Bairro/listar');
+        redirect('Admin/pagina');
     }
 
 }
