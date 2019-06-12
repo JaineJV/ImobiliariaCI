@@ -8,7 +8,11 @@
     </head>
     
     <style>
-
+        #footer{
+            margin-top: 10px; position:absolute;
+            bottom:0;
+            width:100%;
+        }
             /*body {background-size: cover;}*/
             /*Você também pode centralizar o background utilizando o seguinte código: background-position: center;. Exemplo:*/
 

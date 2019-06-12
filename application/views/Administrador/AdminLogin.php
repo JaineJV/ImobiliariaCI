@@ -21,7 +21,7 @@
     <body class="bg-light">
         <div class="container mt-5">
             <div class="card mx-auto" style="max-width: 300px;">
-                <div class="card-header bg-danger text-light"> Login de Usuário </div>
+                <div class="card-header bg-danger text-light"> Login Administrador </div>
                 <div class="card-body">
                     <?php
                     $mensagem = $this->session->flashdata('mensagem');

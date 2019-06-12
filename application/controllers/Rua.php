@@ -33,6 +33,7 @@ class Rua extends CI_Controller {
             $data['bairros'] = $this->bm->getAll();
             
             $this->load->view('Administrador/Rua/FormRua', $data);
+            
         } else {
             $data = array(
                 

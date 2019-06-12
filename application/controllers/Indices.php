@@ -21,7 +21,7 @@ class Indices extends CI_Controller {
         $data['indices'] = $this->im->getAll();
 
         $this->load->view('Header');
-        $this->load->view('Destaque/ListaIndices', $data);
+        $this->load->view('Administrador/Indice/ListaIndices', $data);
         $this->load->view('Footer');
     }
 
@@ -39,7 +39,7 @@ class Indices extends CI_Controller {
             $data['indices'] = $this->im->getAll();
 
             $this->load->view('Header');
-            $this->load->view('Indices/ListaIndices', $data);
+            $this->load->view('Administrador/Indice/FormIndice', $data);
             $this->load->view('Footer');
         } else {
             $data = array(
@@ -74,7 +74,7 @@ class Indices extends CI_Controller {
                 $data['indice'] = $this->Integrante_model->getOne($id);
 
                 $this->load->view('Header');
-                $this->load->view('ListaIndices', $data);
+                $this->load->view('Administrador/Indice/ListaIndices', $data);
                 $this->load->view('Footer');
             } else {
                 $data = array(
@@ -107,7 +107,7 @@ class Indices extends CI_Controller {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao deletar Índice...</div>');
             }
 
-            redirect('Inndices/listar');
+            redirect('Indices/listar');
         }
         redirect('Indices/listar');
     }
