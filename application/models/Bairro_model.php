@@ -3,8 +3,9 @@
 class Bairro_model extends CI_Model{
     
     public function getAll(){
+        $this->db->select('tb_bairro.*,tb_cidade.nome_cidade as nomeCidade');
+        $this->db->join('tb_cidade', 'tb_cidade.id_cidade = tb_bairro.cd_cidade', 'inner');
         $query = $this->db->get('tb_bairro');
-        
         return $query->result();
     }
     

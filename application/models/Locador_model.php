@@ -1,31 +1,30 @@
 <?php
 
-class Rua_model extends CI_Model{
+class Locador_model extends CI_Model{
     
     public function getAll(){
-        $this->db->select('tb_rua.*,tb_bairro.nome_bairro as nomeBairro');
-        $this->db->join('tb_bairro', 'tb_bairro.id_bairro = tb_rua.id_rua', 'inner');
-        $query = $this->db->get('tb_rua');
+        $query = $this->db->get('tb_locador');
+        
         return $query->result();
     }
     
     public function insert($data = array()){
-        $this->db->insert('tb_rua', $data);
+        $this->db->insert('tb_locador', $data);
         
         return $this->db->affected_rows();
     }
     
     public function getOne($id){
-        $this->db->where('id_rua', $id);
-        $query = $this->db->get('tb_rua');
+        $this->db->where('id_locador', $id);
+        $query = $this->db->get('tb_locador');
         
         return $query->row(0);
     }
     
     public function update($id, $data = array()){
         if($id > 0){
-            $this->db->where('id_rua', $id);
-            $this->db->update('tb_rua', $data);
+            $this->db->where('id_locador', $id);
+            $this->db->update('tb_locador', $data);
             
             return $this->db->affected_rows();
         } else {
@@ -35,8 +34,8 @@ class Rua_model extends CI_Model{
     
     public function delete($id){
         if($id > 0){
-            $this->db->where('id_rua', $id);
-            $this->db->delete('tb_rua');
+            $this->db->where('id_locador', $id);
+            $this->db->delete('tb_locador');
             
             return $this->db->affected_rows();
         } else {

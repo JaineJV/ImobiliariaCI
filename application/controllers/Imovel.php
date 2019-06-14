@@ -20,10 +20,10 @@ class Imovel extends CI_Controller {
         $data['imoveis'] = $this->im->getAll();
 
         $this->load->view('Header');
-        $this->load->view('Destaque/ListaDestaque', $data);
+        $this->load->view('Adinistrador/Imovel/ListaImoveis', $data);
         $this->load->view('Footer');
     }
-    
+
     public function buscar() {
         $this->form_validation->set_rules('id_operador', 'id_operador', 'required');
         $this->form_validation->set_rules('id_cidade', 'id_cidade', 'required');
@@ -40,14 +40,14 @@ class Imovel extends CI_Controller {
 
             $this->load->model('Categoria_model', 'cam');
             $data['categorias'] = $this->cam->getAll();
-            
+
             $this->load->model('Bairro_model', 'bm');
             $data['bairros'] = $this->bm->getAll();
 
             $this->load->view('Header', $data);
             $this->load->view('Footer');
         } else {
-           
+
             $data = array(
                 'id_operador' => $this->input->post('id_operador'),
                 'id_cidade' => $this->input->post('id_cidade'),
@@ -58,53 +58,73 @@ class Imovel extends CI_Controller {
                 'qtd_garagem' => $this->input->post('qtd_garagem')
             );
             if ($this->Imovel_model->select($data)) {
-
                 
-            } 
+            }
         }
     }
 
-
     public function cadastrar() {
-        $this->form_validation->set_rules('numero_garagem', 'numero_garagem', 'required');
-        $this->form_validation->set_rules('quantidade_dormitorio', 'quantidade_dormitorio', 'required');
+        $this->form_validation->set_rules('cd_locador', 'cd_locador', 'required');
         $this->form_validation->set_rules('preco_imovel', 'preco_imovel', 'required');
         $this->form_validation->set_rules('area_total', 'area_total', 'required');
-        $this->form_validation->set_rules('area_construida', 'area_construida', 'required');
-        $this->form_validation->set_rules('cd_endereco', 'endereco', 'required');
-        $this->form_validation->set_rules('cd_categoria', 'categoria', 'required');
+        $this->form_validation->set_rules('cd_rua', 'cd_rua', 'required');
+        $this->form_validation->set_rules('cd_categoria', 'cd_categoria', 'required');
+
 
         if ($this->form_validation->run() == false) {
-            $this->cadastrar();
+            
+            $this->load->model('Locador_model', 'lm');
+            $data['locadores'] = $this->lm->getAll();
+            
+            $this->load->model('Rua_model', 'rm');
+            $data['ruas'] = $this->rm->getAll();
+            
+            $this->load->model('Categoria_model', 'cm');
+            $data['categorias'] = $this->cm->getAll();
+            
+            $this->load->view('Administrador/Imovel/FormImovel');
         } else {
-            if (!empty($_FILES['imagem_imovel']['name'])) {
-                $config['upload_path'] = '.public/uploads/';
-                $config['allowed_types'] = 'gif|jpg|png';
-                $config['max_size'] = 100;
-                $config['max_width'] = 1024;
-                $config['max_height'] = 768;
-                $config['encrypt_name'] = true;
-                $this->load->library('upload', $config);
-                if (!$this->upload->do_upload('imagem_imovel')) {
-                    $this->session->set_flashdata('retorno', '<div class="alert alert-danger">' . $this->upload->display_errors() . redirect(base_url('imovel')) . '</div>');
-                } else {
-                    $imovel['imagem_imovel'] = $this->upload->data()['file_name'];
-                }
+            $data = array(
+                'cd_locador' => $this->input->post('cd_locador'),
+                'numero_garagem' => $this->input->post('numero_garagem'),
+                'quantidade_dormitorio' => $this->input->post('quantidade_dormitorio'),
+                'preco_imovel' => $this->input->post('preco_imovel'),
+                'area_total' => $this->input->post('area_total'),
+                'area_construida' => $this->input->post('area_construida'),
+                'cd_rua' => $this->input->post('cd_rua'),
+                'cd_categoria' => $this->input->post('categoria'),
+                'numero_residencial' => $this->input->post('numero_residencial'),
+                'sala_estar' => $this->input->post('sala_estar'),
+                'numero_banheiro' => $this->input->post('numero_banheiro'),
+                'area_servico' => $this->input->post('area_servico'),
+                'cozinha' => $this->input->post('cozinha')
+            );
+
+            $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_width'] = 1024;
+            $config['max_height'] = 768;
+            $config['encrypt_name'] = true;
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('userfile')) {
+                //Cria uma sessão com o error e redireciona
+                $error = $this->upload->display_errors();
+                $this->session->set_flashdata('mensagem', '<div class="alert alert-succsess">' . $error . '</div>');
+                redirect('Imovel/cadastrar');
+                exit();
+            } else {
+                //Pega o nome do arquivo que foi enviado e adiciona no array $data
+                $data['imagem'] = $this->upload->data('file_name');
             }
-            $imovel['numero_garagem'] = $this->input->post('numero_garagem');
-            $imovel['quantidade_dormitorio'] = $this->input->post('quantidade_dormitorio');
-            $imovel['preco_imovel'] = $this->input->post('preco_imovel');
-            $imovel['area_total'] = $this->input->post('area_total');
-            $imovel['area_construida'] = $this->input->post('area_construida');
-            $imovel['cd_endereco'] = $this->input->post('endereco');
-            $imovel['cd_categoria'] = $this->input->post('categoria');
 
-            if ($this->Imovel_model->insert($imovel)) {
-
-                $this->session->set_flashdata('retorno', '<div class="alert alert-success"> Imovel cadastrado com sucesso! </div>');
+            //Chama o método insert do Model passando os dados a inserir, e já valida se teve linhas afetadas.
+            if ($this->Equipe_model->insert($data)) {
+                //Salva uma mensagem rapida na sessão.
+                $this->session->set_flashdata('mensagem', 'Imóvel cadastrado com sucesso!!!');
                 redirect('Imovel/listar');
             } else {
-                $this->session->set_flashdata('retorno', '<div class="alert alert-danger"> Falha ao cadastrar...</div>');
+                unlink('./uploads/' . $data['imagem']);
+                $this->session->set_flashdata('mensagem', 'Erro ao cadastrar imóvel!!!');
                 redirect('Imovel/cadastrar');
             }
         }
@@ -112,36 +132,57 @@ class Imovel extends CI_Controller {
 
     public function alterar($id) {
         if ($id > 0) {
-            $this->load->model('Imovel_model');
 
-            $this->form_validation->set_rules('numero_garagem', 'numero_garagem', 'required');
-            $this->form_validation->set_rules('quantidade_dormitorio', 'quantidade_dormitorio', 'required');
+            $this->form_validation->set_rules('cd_locador', 'cd_locador', 'required');
             $this->form_validation->set_rules('preco_imovel', 'preco_imovel', 'required');
             $this->form_validation->set_rules('area_total', 'area_total', 'required');
-            $this->form_validation->set_rules('area_construida', 'area_construida', 'required');
-            $this->form_validation->set_rules('cd_endereco', 'endereco', 'required');
-            $this->form_validation->set_rules('cd_categoria', 'categoria', 'required');
+            $this->form_validation->set_rules('cd_rua', 'cd_rua', 'required');
+            $this->form_validation->set_rules('cd_categoria', 'cd_categoria', 'required');
+
 
             if ($this->form_validation->run() == false) {
 
                 $data['imovel'] = $this->Imovel_model->getOne($id);
-                $this->load->view('FormImovel', $data);
+
+                $this->load->view('Administrador/Imovel/FormImovel', $data);
             } else {
                 $data = array(
+                'cd_locador' => $this->input->post('cd_locador'),
                 'numero_garagem' => $this->input->post('numero_garagem'),
                 'quantidade_dormitorio' => $this->input->post('quantidade_dormitorio'),
                 'preco_imovel' => $this->input->post('preco_imovel'),
                 'area_total' => $this->input->post('area_total'),
                 'area_construida' => $this->input->post('area_construida'),
-                'cd_endereco' => $this->input->post('endereco'),
-                'cd_categoria' => $this->input->post('categoria')
-                );
+                'cd_rua' => $this->input->post('cd_rua'),
+                'cd_categoria' => $this->input->post('categoria'),
+                'numero_residencial' => $this->input->post('numero_residencial'),
+                'sala_estar' => $this->input->post('sala_estar'),
+                'numero_banheiro' => $this->input->post('numero_banheiro'),
+                'area_servico' => $this->input->post('area_servico'),
+                'cozinha' => $this->input->post('cozinha')
+            );
+
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_width'] = 1024;
+                $config['max_height'] = 768;
+                $config['encrypt_name'] = true;
+                $this->load->library('upload', $config);
+                if (!$this->upload->do_upload('userfile')) {
+                    //Cria uma sessão com o error e redireciona
+                    $error = $this->upload->display_errors();
+                    $this->session->set_flashdata('mensagem', '<div class="alert alert-succsess">' . $error . '</div>');
+                    redirect('Imovel/cadastrar');
+                    exit();
+                } else {
+                    $data['imagem'] = $this->upload->data('file_name');
+                }
 
                 if ($this->Imovel_model->update($id, $data)) {
-                    $this->session->set_flashdata('retorno', '<div class="alert alert-success"> Imóvel alterado com sucesso!');
+                    $this->session->set_flashdata('mensagem', 'Imóvel alterado com sucesso!!!');
                     redirect('Imovel/listar');
                 } else {
-                    $this->session->set_flashdata('mensagem', 'Falha ao alterar Imóvel...');
+                    $this->session->set_flashdata('mensagem', 'Erro ao alterar imóvel...');
                     redirect('Imovel/alterar/' . $id);
                 }
             }
@@ -151,16 +192,14 @@ class Imovel extends CI_Controller {
     }
 
     public function deletar($id) {
-        if ($id > 0) {
-            $this->load->model('Imovel_model');
-
+        If ($id > 0) {
+            //Manda para o model deletar e já valida o retorno para ver se deu certo.
+            unlink('./uploads/' . $data['imagem']);
             if ($this->Imovel_model->delete($id)) {
-                $this->session->set_flashdata('mensagem', 'Imóvel deletado com sucesso!');
+                $this->session->set_flashdata('mensagem', 'Imóvel deletado com sucesso!!!');
             } else {
-                $this->session->set_flashdata('mensagem', 'Falha ao deletar Veículo...');
+                $this->session->set_flashdata('mensagem', 'Erro ao deletar imóvel...');
             }
-
-            redirect('Imovel/listar');
         }
         redirect('Imovel/listar');
     }

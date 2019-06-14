@@ -9,6 +9,10 @@ class Imovel_model extends CI_Model{
     
     public function getAll(){
         
+        $this->db->select('tb_imovel.*,tb_rua.nome_rua as nomeRua, tb_categoria.nome_categoria as nomeCategoria, tb_locador.nome_locador as nomeLocador');
+        $this->db->join('tb_rua', 'tb_rua.id_rua = tb_imovel.cd_rua', 'inner');
+        $this->db->join('tb_categoria', 'tb_categoria.id_categoria = tb_imovel.cd_categoria', 'inner');
+        $this->db->join('tb_locador', 'tb_locador.id_locador = tb_imovel.cd_locador', 'inner');
         $query = $this->db->get('tb_imovel');
         return $query->result();
         
