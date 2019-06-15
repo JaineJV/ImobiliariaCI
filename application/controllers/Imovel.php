@@ -19,9 +19,7 @@ class Imovel extends CI_Controller {
 
         $data['imoveis'] = $this->im->getAll();
 
-        $this->load->view('Header');
-        $this->load->view('Adinistrador/Imovel/ListaImoveis', $data);
-        $this->load->view('Footer');
+        $this->load->view('Administrador/Imovel/ListaImoveis', $data);
     }
 
     public function buscar() {
@@ -79,10 +77,10 @@ class Imovel extends CI_Controller {
             $this->load->model('Rua_model', 'rm');
             $data['ruas'] = $this->rm->getAll();
             
-            $this->load->model('Categoria_model', 'cm');
-            $data['categorias'] = $this->cm->getAll();
+            $this->load->model('Categoria_model', 'cam');
+            $data['categorias'] = $this->cam->getAll();
             
-            $this->load->view('Administrador/Imovel/FormImovel');
+            $this->load->view('Administrador/Imovel/FormImovel', $data);
         } else {
             $data = array(
                 'cd_locador' => $this->input->post('cd_locador'),
@@ -107,18 +105,17 @@ class Imovel extends CI_Controller {
             $config['encrypt_name'] = true;
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('userfile')) {
-                //Cria uma sessão com o error e redireciona
+                
                 $error = $this->upload->display_errors();
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-succsess">' . $error . '</div>');
                 redirect('Imovel/cadastrar');
                 exit();
             } else {
-                //Pega o nome do arquivo que foi enviado e adiciona no array $data
+                
                 $data['imagem'] = $this->upload->data('file_name');
             }
 
-            //Chama o método insert do Model passando os dados a inserir, e já valida se teve linhas afetadas.
-            if ($this->Equipe_model->insert($data)) {
+            if ($this->Imovel_model->insert($data)) {
                 //Salva uma mensagem rapida na sessão.
                 $this->session->set_flashdata('mensagem', 'Imóvel cadastrado com sucesso!!!');
                 redirect('Imovel/listar');

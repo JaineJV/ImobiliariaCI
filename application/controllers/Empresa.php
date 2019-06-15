@@ -18,22 +18,26 @@ class Empresa extends CI_Controller {
     public function mostrar(){
         $this->load->model('Empresa_model', 'em');
 
-        $data['empresas'] = $this->em->getAll();
+        $summernote['summernote'] = $this->Empresa_model->getOne(0);
         
-        $this->load->view('Administrador/Empresa/VisualizarTexto', $data);
+        $this->load->view('Administrador/Empresa/VisualizarTexto', $summernote);
     }
-
+    
+    
     public function cadastrar() {
+      
         $this->form_validation->set_rules('summernote', 'summernote', 'required');
 
         if ($this->form_validation->run() == false) {
-            
-            $this->load->view('Administrador/Empresa/EditarInformacao');
+            $summernote['summernote'] = $this->Empresa_model->getOne(0);
+            $this->load->view('Administrador/Empresa/EditarInformacao',$summernote);
+           
         } else {
+            
             $data = array(
                 'summernote' => $this->input->post('summernote')
             );
-            if ($this->Empresa_model->insert($data)) {
+            if ($this->Empresa_model->update($data)) {
 
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-success" role="alert">Dados cadastrados com sucesso!</div>');
                 redirect('Admin/pagina');

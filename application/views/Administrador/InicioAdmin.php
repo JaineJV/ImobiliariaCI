@@ -124,6 +124,30 @@
             <div id="imovel" class="card" style="margin-top: 20px;">
                 
                 <div class="card-header">
+                    <h4 class="text-primary"><i class="fas fa-cogs"></i> Gerenciar Locador </h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-3">
+                            <a href="<?= $this->config->base_url(); ?>Locador/cadastrar"><button class="btn btn-danger btn-lg btn-block" type="submit" value="Cadastrar" style="height: 100px">
+                                Cadastrar 
+                                <i class="far fa-plus-square"></i>
+                                </button></a>
+                        </div>
+                        <div class="col-3">
+                            <a href="<?= $this->config->base_url(); ?>Locador/listar"><button class="btn btn-outline-primary btn-lg btn-block" type="submit" value="Cadastrar" style="height: 100px">
+                                Listar 
+                                <i class="far fa-list-alt"></i>
+                                </button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="imovel" class="card" style="margin-top: 20px;">
+                
+                <div class="card-header">
                     <h4 class="text-primary"><i class="fas fa-cogs"></i> Gerenciar Imóveis </h4>
                 </div>
 
@@ -179,13 +203,13 @@
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col-3">
-                            <a href="<?= $this->config->base_url(); ?>Indice/cadastrar"><button class="btn btn-danger btn-lg btn-block" type="submit" value="Cadastrar" style="height: 100px">
+                            <a href="<?= $this->config->base_url(); ?>Indices/cadastrar"><button class="btn btn-danger btn-lg btn-block" type="submit" value="Cadastrar" style="height: 100px">
                                 Cadastrar 
                                 <i class="far fa-plus-square"></i>
                                 </button></a>
                         </div>
                         <div class="col-3">
-                            <a href="<?= $this->config->base_url(); ?>Indice/listar"><button class="btn btn-outline-primary btn-lg btn-block" type="submit" value="Cadastrar" style="height: 100px">
+                            <a href="<?= $this->config->base_url(); ?>Indices/listar"><button class="btn btn-outline-primary btn-lg btn-block" type="submit" value="Cadastrar" style="height: 100px">
                                 Listar 
                                 <i class="far fa-list-alt"></i>
                                 </button></a>

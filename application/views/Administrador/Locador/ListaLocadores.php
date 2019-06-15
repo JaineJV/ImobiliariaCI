@@ -30,7 +30,10 @@
         <table class="table table-bordered bg-white text-center" style="margin-top: 10px;">
             <thead  class="thead-light">
                 <tr>
-                    <th scope="col"> Locador </th>
+                    <th scope="col"> Nome: </th>
+                    <th scope="col"> CPF: </th>
+                    <th scope="col"> Telefone: </th>
+                    <th scope="col"> Email </th>
                     <th scope="col"> Ações </th>
                 </tr>     
             </thead>

@@ -21,15 +21,10 @@ class Empresa_model extends CI_Model{
         return $query->row(0);
     }
     
-    public function update($id, $data = array()){
-        if($id > 0){
-            $this->db->where('id_sobre', $id);
+    public function update($data = array()){
             $this->db->update('tb_sobre', $data);
-            
             return $this->db->affected_rows();
-        } else {
-            return false;
-        }
+        
     }
     
     public function delete($id){

@@ -21,12 +21,14 @@
                 </div>
             </div>
         </nav>
-        
+
         <div class="container">
             <div class="row">
-
+                <div class="col-12" style="margin-top: 10px;">
+                    <?= $summernote->summernote ?>
+                </div>
             </div>  
         </div>
-        
+
     </body>
 </html>

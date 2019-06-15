@@ -15,7 +15,7 @@ class Admin extends CI_Controller{
     }
     
     public function index(){
-        $this->login();
+        $this->pagina();
     }
     
     public function pagina(){

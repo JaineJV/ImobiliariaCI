@@ -33,6 +33,10 @@
             </div>
         </nav>
 
+        <?php
+        $mensagem = $this->session->flashdata('mensagem');
+        echo(isset($mensagem) ? $mensagem : '');
+        ?>
         <div class="container" style="margin-top: 20px;">
             <div class="row justify-content-md-center">
                 <div class="col-12 align-self-center">
@@ -155,12 +159,13 @@
                                                 <label class="custom-file-label" for="inputGroupFile03">Selecione uma foto para o Imóvel...</label>
                                             </div>
                                         </div>
+
+                                        <?php
+                                        if (!empty($imovel->imagem) && file_exists('./uploads/' . $imovel->imagem)) {
+                                            echo '<div class="form-group text-center"><img src="' . base_url('uploads/' . $imovel->imagem) . '" width="100" height="100"></div>';
+                                        }
+                                        ?>
                                     </div>
-                                    <?php
-                                    if (!empty($imovel->imagem) && file_exists('./uploads/' . $imovel->imagem)) {
-                                        echo '<div class="form-group text-center"><img src="' . base_url('uploads/' . $imovel->imagem) . '" width="100" height="100"></div>';
-                                    }
-                                    ?>
                                 </div>
 
                                 <div class="col-md-12">

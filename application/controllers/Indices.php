@@ -16,13 +16,12 @@ class Indices extends CI_Controller {
 
     public function listar() {
 
-        $this->load->model('Indices_model', 'im');
+        $this->load->model('Indices_model', 'idm');
 
-        $data['indices'] = $this->im->getAll();
+        $data['indices'] = $this->idm->getAll();
 
-        $this->load->view('Header');
-        $this->load->view('Administrador/Indice/ListaIndices', $data);
-        $this->load->view('Footer');
+        $this->load->view('Administrador/Indices/ListaIndices', $data);
+        
     }
 
     public function cadastrar() {
@@ -34,13 +33,8 @@ class Indices extends CI_Controller {
 
         if ($this->form_validation->run() == false) {
 
-            $this->load->model('Indices_model', 'im');
-
-            $data['indices'] = $this->im->getAll();
-
-            $this->load->view('Header');
-            $this->load->view('Administrador/Indice/FormIndice', $data);
-            $this->load->view('Footer');
+            $this->load->view('Administrador/Indices/FormIndice');
+            
         } else {
             $data = array(
                 'id_indice' => $this->input->post('id_indice'),
@@ -71,11 +65,10 @@ class Indices extends CI_Controller {
 
             if ($this->form_validation->run() == false) {
 
-                $data['indice'] = $this->Integrante_model->getOne($id);
+                $data['indice'] = $this->Indices_model->getOne($id);
 
-                $this->load->view('Header');
-                $this->load->view('Administrador/Indice/ListaIndices', $data);
-                $this->load->view('Footer');
+                $this->load->view('Administrador/Indices/ListaIndices', $data);
+                
             } else {
                 $data = array(
                     'id_indice' => $this->input->post('id_indice'),

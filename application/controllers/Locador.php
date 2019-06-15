@@ -46,7 +46,7 @@ class Locador extends CI_Controller {
             if ($this->Locador_model->insert($data)) {
 
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-success" role="alert">Categoria cadastrada com sucesso!</div>');
-                redirect('Admin');
+                redirect('Locador/listar');
             } else {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao cadastrar...</div>');
                 redirect('Locador/cadastrar');
@@ -81,7 +81,7 @@ class Locador extends CI_Controller {
 
                 if ($this->Locador_model->update($id, $data)) {
                     $this->session->set_flashdata('mensagem', '<div class="alert alert-success" role="alert">Locador alterado com sucesso!</div>');
-                    redirect('Admin/pagina');
+                    redirect('Locador/listar');
                 } else {
                     $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao alterar ...</div>');
                     redirect('Locador/alterar/' . $id);
@@ -101,9 +101,9 @@ class Locador extends CI_Controller {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao deletar...</div>');
             }
 
-            redirect('Admin');
+            redirect('Locador/listar');
         }
-        redirect('Admin');
+        redirect('Locador/listar');
     }
 
 }

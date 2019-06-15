@@ -29,22 +29,22 @@
                 <a class="navbar-brand" href="<?= $this->config->base_url(); ?>Empresa/mostrar"><button id="visualizar" name="visualizar" type="submit" class="btn btn-danger btn-lg" value="Submit">Visualizar Texto</button></a>
             </div>
         </nav>
-        <div id="summernote" ></div>
+        <form action="<?= $this->config->base_url(); ?>Empresa/cadastrar" method="POST">
+            <textarea id="summernote" name="summernote" >
+                <?=$summernote->summernote?>
+            </textarea>
 
-        <div class="text-center" style="margin-top: 10px;">
-            <button id="salvarSobre" name="salvarSobre" onclick="myFunction()" type="submit" class="btn btn-danger btn-lg" value="Submit">Salvar</button>
-        </div>
-
+            <div class="text-center" style="margin-top: 10px;">
+                <button id="salvarSobre" name="salvarSobre" type="submit" class="btn btn-danger btn-lg" value="Submit">Salvar</button>
+            </div>
+        </form>
         <script>
             $('#summernote').summernote({
                 placeholder: 'Escreva aqui um pouco mais sobre a Empresa...',
                 tabsize: 2,
                 height: 500
             });
-            function myFunction() {
-                var sobreEmpresa = $('#summernote').summernote('code');
-                console.log(sobreEmpresa);
-            }
+           
         </script>
 
     </body>
