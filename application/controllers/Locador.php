@@ -7,7 +7,6 @@ class Locador extends CI_Controller {
     public function __construct() {
         parent::__construct();
 
-        $this->load->model('Imovel_model');
         $this->load->model('Locador_model');
     }
 
@@ -24,7 +23,7 @@ class Locador extends CI_Controller {
     }
 
     public function cadastrar() {
-        $this->form_validation->set_rules('nome_categoria', 'nome_categoria', 'required');
+        $this->form_validation->set_rules('nome_locador', 'nome_locador', 'required');
         $this->form_validation->set_rules('cpf', 'cpf', 'required');
         $this->form_validation->set_rules('telefone', 'telefone', 'required');
         $this->form_validation->set_rules('nascimento', 'nascimento', 'required');
@@ -41,11 +40,11 @@ class Locador extends CI_Controller {
                     'telefone' => $this->input->post('telefone'),
                     'nascimento' => $this->input->post('nascimento'),
                     'genero' => $this->input->post('genero'),
-                    'email' => $this->input->post('email')
-                );
+                    'email' => $this->input->post('email'),
+                );                
             if ($this->Locador_model->insert($data)) {
 
-                $this->session->set_flashdata('mensagem', '<div class="alert alert-success" role="alert">Categoria cadastrada com sucesso!</div>');
+                $this->session->set_flashdata('mensagem', '<div class="alert alert-success" role="alert">Locador cadastrado com sucesso!</div>');
                 redirect('Locador/listar');
             } else {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao cadastrar...</div>');
@@ -57,7 +56,7 @@ class Locador extends CI_Controller {
     public function alterar($id) {
         if ($id > 0) {
 
-            $this->form_validation->set_rules('nome_categoria', 'nome_categoria', 'required');
+            $this->form_validation->set_rules('nome_locador', 'nome_locador', 'required');
             $this->form_validation->set_rules('cpf', 'cpf', 'required');
             $this->form_validation->set_rules('telefone', 'telefone', 'required');
             $this->form_validation->set_rules('nascimento', 'nascimento', 'required');

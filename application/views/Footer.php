@@ -1,6 +1,39 @@
 <!--talvez retire a legenda do slide mas não sei ainda-->
-
+<script src="https://kit.fontawesome.com/7a19d3ed6e.js"></script>
+<div class="bg-light" style="margin-top: 10px;">
+<div class="container">
+  <div class="row">
+      <div class="col"><br>
+        <img src="../ImobiliariaCI/Imagens/logo.png" alt=""/>
+        <h1 class="text-danger" style="margin-top: 50px;">Imobiliária</h1> <h1 class="text-danger" style="margin-left: 120px;">Colinas</h1>
+    </div>
+    <div class="col">
+        <br>
+        <h5 class="text-danger"> Menu: </h5>
+        <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>" style="margin-left: 10px;"> Home </a><br><br>
+        <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Imovel/listarVisitante" style="margin-left: 10px;"> Imóveis </a><br><br>
+        <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Indice/mostrarVisitante" style="margin-left: 10px;"> Índices </a><br><br>
+        <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Empresa/mostrarVisitante" style="margin-left: 10px;"> Sobre a Empresa </a><br><br>
+        <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Empresa/contato" style="margin-left: 10px;"> Contato </a>
+        
+    </div>
+    <div class="col">
+      <br>
+        <h5 class="text-danger"> Fale Conosco: </h5>
+        <p><i class="far fa-envelope text-danger"></i> imobiliariacolinas@gmail.com </p>
+        <p><i class="fas fa-phone text-danger"></i> (49)3622-9762 </p>
+        <p><i class="fab fa-whatsapp text-danger"></i> (49) 9 9932-4568 </p>
+        
+        <br>
+        <h5 class="text-danger"> Redes Sociais: </h5>
+        <p><i class="fab fa-instagram text-danger"></i> Colinas_Imoveis </p> 
+        <p><i class="fab fa-twitter-square text-danger"></i> Colinas_Imoveis </p>
+        <p><i class="fab fa-facebook-square text-danger"></i> Imobiliária Colinas </p>
+        <p><i class="fab fa-snapchat-square text-danger"></i> imobiliaria_colinasmo</p>
+    </div>
   </div>
+</div>
+</div>
 <script type="text/javascript">
     function setaImagem() {
         var settings = {

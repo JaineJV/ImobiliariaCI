@@ -52,3 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Imovel';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['send-email'] = 'email controller';
+$route['email'] = 'email controller/send';

@@ -5,13 +5,27 @@
  *
  * @author Vianna
  */
-class Indices_model extends CI_Model{
+class Indice_model extends CI_Model{
     
     public function getAll(){
         
         $query = $this->db->get('tb_indice');
         return $query->result();
         
+    }
+    
+    public function getHeader(){
+        $this->db->select('tipo');
+        $this->db->group_by('tipo');
+        $query = $this->db->get('tb_indice');
+        return $query->result();
+    }
+    
+    public function getBD(){
+       
+        $this->db->order_by('tipo');
+        $query = $this->db->get('tb_indice');
+        return $query->result();
     }
     
     public function insert($data = array()){

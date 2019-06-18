@@ -11,7 +11,7 @@ class Imovel extends CI_Controller {
     }
 
     public function index() {
-        $this->listar();
+        $this->buscar();
     }
 
     public function listar() {
@@ -21,12 +21,38 @@ class Imovel extends CI_Controller {
 
         $this->load->view('Administrador/Imovel/ListaImoveis', $data);
     }
+    
+    public function listarVisitante() {
+        $this->load->model('Imovel_model', 'im');
+
+        $data['imoveis'] = $this->im->select();
+        
+        $this->load->view('Header');
+        $this->load->view('Visitante/ListarImoveis', $data);
+        $this->load->view('Footer');
+    }
+    
+    public function detalhes($id){
+        if( $id > 0){
+        $this->load->model('Imovel_model', 'im');
+
+        $data['imoveis'] = $this->im->select();
+        
+        $this->load->view('Header');
+        $this->load->view('Visitante/Detalhes', $data);
+        $this->load->view('Footer');
+        } else{
+            $this->load->view('Header');
+        $this->load->view('Visitante/ListarImoveis', $data);
+        $this->load->view('Footer');
+        }
+    }
 
     public function buscar() {
-        $this->form_validation->set_rules('id_operador', 'id_operador', 'required');
-        $this->form_validation->set_rules('id_cidade', 'id_cidade', 'required');
-        $this->form_validation->set_rules('id_categoria', 'id_categoria', 'required');
-        $this->form_validation->set_rules('id_bairro', 'id_bairro', 'required');
+        $this->form_validation->set_rules('nomeOperador', 'nomeOperador', 'required');
+        $this->form_validation->set_rules('nomeCidade', 'nomeCidade', 'required');
+        $this->form_validation->set_rules('nomeCategoria', 'nomeCategoria', 'required');
+        $this->form_validation->set_rules('nomeBairro', 'nomeBairro', 'required');
 
         if ($this->form_validation->run() == false) {
 
@@ -42,35 +68,34 @@ class Imovel extends CI_Controller {
             $this->load->model('Bairro_model', 'bm');
             $data['bairros'] = $this->bm->getAll();
 
-            $this->load->view('Header', $data);
+            $this->load->view('Header');
+            $this->load->view('Slider');
+            $this->load->view('Visitante/Inicio', $data);
             $this->load->view('Footer');
         } else {
 
-            $data = array(
-                'id_operador' => $this->input->post('id_operador'),
-                'id_cidade' => $this->input->post('id_cidade'),
-                'id_categoria' => $this->input->post('id_categoria'),
-                'id_bairro' => $this->input->post('id_bairro'),
-                'qtd_dormitorio' => $this->input->post('qtd_dormitorio'),
-                'qtd_banheiro' => $this->input->post('qtd_banheiro'),
-                'qtd_garagem' => $this->input->post('qtd_garagem')
-            );
-            if ($this->Imovel_model->select($data)) {
-                
-            }
+            //if ($this->Imovel_model->getImovel($data)) {
+                redirect('Imovel/listarVisitante', $data);
+           // } else{
+                //redirect('Imovel/buscar');
+           // }
         }
     }
 
     public function cadastrar() {
-        $this->form_validation->set_rules('cd_locador', 'cd_locador', 'required');
+        $this->form_validation->set_rules('nomeLocador', 'nomeLocador', 'required');
         $this->form_validation->set_rules('preco_imovel', 'preco_imovel', 'required');
         $this->form_validation->set_rules('area_total', 'area_total', 'required');
-        $this->form_validation->set_rules('cd_rua', 'cd_rua', 'required');
-        $this->form_validation->set_rules('cd_categoria', 'cd_categoria', 'required');
+        $this->form_validation->set_rules('nomeRua', 'nomeRua', 'required');
+        $this->form_validation->set_rules('nomeCategoria', 'nomeCategoria', 'required');
+        $this->form_validation->set_rules('nomeOperador', 'nomeOperador', 'required');
 
 
         if ($this->form_validation->run() == false) {
             
+            $this->load->model('Operador_model', 'om');
+            $data['operadores'] = $this->om->getAll();
+        
             $this->load->model('Locador_model', 'lm');
             $data['locadores'] = $this->lm->getAll();
             
@@ -83,14 +108,15 @@ class Imovel extends CI_Controller {
             $this->load->view('Administrador/Imovel/FormImovel', $data);
         } else {
             $data = array(
-                'cd_locador' => $this->input->post('cd_locador'),
+                'cd_locador' => $this->input->post('nomeLocador'),
                 'numero_garagem' => $this->input->post('numero_garagem'),
                 'quantidade_dormitorio' => $this->input->post('quantidade_dormitorio'),
                 'preco_imovel' => $this->input->post('preco_imovel'),
                 'area_total' => $this->input->post('area_total'),
                 'area_construida' => $this->input->post('area_construida'),
-                'cd_rua' => $this->input->post('cd_rua'),
-                'cd_categoria' => $this->input->post('categoria'),
+                'cd_rua' => $this->input->post('nomeRua'),
+                'cd_categoria' => $this->input->post('nomeCategoria'),
+                'cd_operador' => $this->input->post('nomeOperador'),
                 'numero_residencial' => $this->input->post('numero_residencial'),
                 'sala_estar' => $this->input->post('sala_estar'),
                 'numero_banheiro' => $this->input->post('numero_banheiro'),
@@ -98,7 +124,7 @@ class Imovel extends CI_Controller {
                 'cozinha' => $this->input->post('cozinha')
             );
 
-            $config['upload_path'] = './uploads/';
+            $config['upload_path'] = './Imagens/';
             $config['allowed_types'] = 'gif|jpg|png';
             $config['max_width'] = 1024;
             $config['max_height'] = 768;
@@ -107,7 +133,7 @@ class Imovel extends CI_Controller {
             if (!$this->upload->do_upload('userfile')) {
                 
                 $error = $this->upload->display_errors();
-                $this->session->set_flashdata('mensagem', '<div class="alert alert-succsess">' . $error . '</div>');
+                $this->session->set_flashdata('mensagem', '<div class="alert alert-success">' . $error . '</div>');
                 redirect('Imovel/cadastrar');
                 exit();
             } else {
@@ -120,7 +146,7 @@ class Imovel extends CI_Controller {
                 $this->session->set_flashdata('mensagem', 'Imóvel cadastrado com sucesso!!!');
                 redirect('Imovel/listar');
             } else {
-                unlink('./uploads/' . $data['imagem']);
+                unlink('./Imagens/' . $data['imagem']);
                 $this->session->set_flashdata('mensagem', 'Erro ao cadastrar imóvel!!!');
                 redirect('Imovel/cadastrar');
             }
@@ -130,11 +156,11 @@ class Imovel extends CI_Controller {
     public function alterar($id) {
         if ($id > 0) {
 
-            $this->form_validation->set_rules('cd_locador', 'cd_locador', 'required');
+            $this->form_validation->set_rules('nomeLocador', 'nomeLocador', 'required');
             $this->form_validation->set_rules('preco_imovel', 'preco_imovel', 'required');
             $this->form_validation->set_rules('area_total', 'area_total', 'required');
-            $this->form_validation->set_rules('cd_rua', 'cd_rua', 'required');
-            $this->form_validation->set_rules('cd_categoria', 'cd_categoria', 'required');
+            $this->form_validation->set_rules('nomeRua', 'nomeRua', 'required');
+            $this->form_validation->set_rules('nomeCategoria', 'nomeCategoria', 'required');
 
 
             if ($this->form_validation->run() == false) {
@@ -144,14 +170,14 @@ class Imovel extends CI_Controller {
                 $this->load->view('Administrador/Imovel/FormImovel', $data);
             } else {
                 $data = array(
-                'cd_locador' => $this->input->post('cd_locador'),
+                'nomeLocador' => $this->input->post('nomeLocador'),
                 'numero_garagem' => $this->input->post('numero_garagem'),
                 'quantidade_dormitorio' => $this->input->post('quantidade_dormitorio'),
                 'preco_imovel' => $this->input->post('preco_imovel'),
                 'area_total' => $this->input->post('area_total'),
                 'area_construida' => $this->input->post('area_construida'),
-                'cd_rua' => $this->input->post('cd_rua'),
-                'cd_categoria' => $this->input->post('categoria'),
+                'nomeRua' => $this->input->post('nomeRua'),
+                'nomeCategoria' => $this->input->post('nomeCategoria'),
                 'numero_residencial' => $this->input->post('numero_residencial'),
                 'sala_estar' => $this->input->post('sala_estar'),
                 'numero_banheiro' => $this->input->post('numero_banheiro'),
@@ -159,7 +185,7 @@ class Imovel extends CI_Controller {
                 'cozinha' => $this->input->post('cozinha')
             );
 
-                $config['upload_path'] = './uploads/';
+                $config['upload_path'] = './Imagens/';
                 $config['allowed_types'] = 'gif|jpg|png';
                 $config['max_width'] = 1024;
                 $config['max_height'] = 768;
@@ -191,7 +217,7 @@ class Imovel extends CI_Controller {
     public function deletar($id) {
         If ($id > 0) {
             //Manda para o model deletar e já valida o retorno para ver se deu certo.
-            unlink('./uploads/' . $data['imagem']);
+            unlink('./Imagens/' . $data['imagem']);
             if ($this->Imovel_model->delete($id)) {
                 $this->session->set_flashdata('mensagem', 'Imóvel deletado com sucesso!!!');
             } else {

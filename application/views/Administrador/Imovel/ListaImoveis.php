@@ -57,7 +57,7 @@
                             echo '<td scope="row">' . $i->area_total . '</td>';
                             echo '<td scope="row">' . $i->area_construida . '</td>';
                             echo '<td scope="row">' . $i->nomeRua . '</td>';
-                            echo '<td scope="row">' . $i->numeor_residencial . '</td>';
+                            echo '<td scope="row">' . $i->numero_residencial . '</td>';
                             echo '<td scope="row">' . $i->nomeCategoria . '</td>';
                             echo '<td scope="row">' . $i->sala_estar . '</td>';
                             echo '<td scope="row">' . $i->numero_banheiro . '</td>';
@@ -65,8 +65,8 @@
                             echo '<td scope="row">' . $i->area_servico . '</td>';
 
                             echo '<td scope="row" style="text-align: center;">'
-                            . '<a href="' . $this->config->base_url() . 'Locador/alterar/' . $i->id_imovel . '" class="btn btn-danger" style="margin-right:4px;"><i class="far fa-edit"></i> Alterar </a>'
-                            . '<a href="' . $this->config->base_url() . 'Locador/deletar/' . $i->id_imovel . '" class="btn btn-outline-secondary"><i class="far fa-trash-alt"></i> Deletar </a></td>';
+                            . '<a href="' . $this->config->base_url() . 'Imovel/alterar/' . $i->id_imovel . '" class="btn btn-danger" style="margin-right:4px;"><i class="far fa-edit"></i> Alterar </a>'
+                            . '<a href="' . $this->config->base_url() . 'Imovel/deletar/' . $i->id_imovel . '" class="btn btn-outline-secondary"><i class="far fa-trash-alt"></i> Deletar </a></td>';
 
                             echo '</tr>';
                         }

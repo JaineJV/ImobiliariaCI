@@ -28,7 +28,7 @@
             <div class="container">
                 <div class="row col-12">
                     <div class="col-md-5">
-                        <a class="navbar-brand" href="#"><img class="bg-light" src="../ImobiliariaCI/Imagens/logo.png" alt="LOGO"/>
+                        <a class="navbar-brand" href="<?= $this->config->base_url(); ?>Admin/pagina"><img class="bg-light" src="../ImobiliariaCI/Imagens/logo.png" alt="LOGO"/>
                         </a>
                     </div>
                     <div class="col-md-4">

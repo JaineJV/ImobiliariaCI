@@ -45,13 +45,13 @@
                             <h3>Cadastro de Imóvel</h3>
                         </div>
                         <div class="card-body">
-                            <form action="" method="POST">
+                            <form action="" enctype="multipart/form-data" method="POST">
                                 <div class="form-row">
                                     <input type="hidden" name="id" value="<?= (isset($imovel)) ? $imovel->id_imovel : ''; ?>">
 
                                     <div class="form-group col-md-4">
-                                        <label for="cd_locador" style="margin-left: 10px; margin-top: 10px"> Locador: </label>
-                                        <select id="cd_locador" class="form-control" name="cd_locador">
+                                        <label for="nomeLocador" style="margin-left: 10px; margin-top: 10px"> Locador: </label>
+                                        <select id="nomeLocador" class="form-control" name="nomeLocador">
                                             <option selected>Selecione um Locador...</option>
                                             <?php
                                             foreach ($locadores as $key => $l) {
@@ -93,8 +93,8 @@
                                     </div>
 
                                     <div class="form-group col-md-4">
-                                        <label for="cd_rua" style="margin-left: 10px; margin-top: 10px"> Rua: </label>
-                                        <select id="cd_rua" class="form-control" name="cd_rua">
+                                        <label for="nomeRua" style="margin-left: 10px; margin-top: 10px"> Rua: </label>
+                                        <select id="nomeRua" class="form-control" name="nomeRua">
                                             <option selected>Selecione uma Rua...</option>
                                             <?php
                                             foreach ($ruas as $key => $r) {
@@ -116,8 +116,8 @@
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <label for="cd_categoria" style="margin-left: 10px; margin-top: 10px"> Categoria: </label>
-                                        <select id="cd_categoria" class="form-control" name="cd_categoria">
+                                        <label for="nomeCategoria" style="margin-left: 10px; margin-top: 10px"> Categoria: </label>
+                                        <select id="nomeCategoria" class="form-control" name="nomeCategoria">
                                             <option selected>Selecione uma Categoria...</option>
                                             <?php
                                             foreach ($categorias as $key => $ca) {
@@ -147,12 +147,26 @@
                                         <input type="text" name="cozinha" id="cozinha" class="form-control" value="<?= (isset($imovel)) ? $imovel->cozinha : ''; ?>">
                                     </div>
 
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-2">
                                         <label for="area_servico" style="margin-left: 10px; margin-top: 10px"> Área de Serviço: </label>
                                         <input type="text" name="area_servico" id="area_servico" class="form-control" value="<?= (isset($imovel)) ? $imovel->area_servico : ''; ?>">
                                     </div>
 
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-2">
+                                        <label for="nomeOperador" style="margin-left: 10px; margin-top: 10px"> Operador: </label>
+                                        <select id="nomeOperador" class="form-control" name="nomeOperador">
+                                            <option selected>Selecione um Operador...</option>
+                                            <?php
+                                            foreach ($operadores as $key => $o) {
+                                                ?> 
+
+                                                <option value="<?= $o->id_operador ?>"><?= $o->tipo_operador ?></option>
+                                            <?php }
+                                            ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-5">
                                         <div class="input-group md-12">
                                             <div class="custom-file">
                                                 <input type="file" name="userfile" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03">
@@ -161,8 +175,8 @@
                                         </div>
 
                                         <?php
-                                        if (!empty($imovel->imagem) && file_exists('./uploads/' . $imovel->imagem)) {
-                                            echo '<div class="form-group text-center"><img src="' . base_url('uploads/' . $imovel->imagem) . '" width="100" height="100"></div>';
+                                        if (!empty($imovel->imagem) && file_exists('./Imagens/' . $imovel->imagem)) {
+                                            echo '<div class="form-group text-center"><img src="' . base_url('Imagens/' . $imovel->imagem) . '" width="100" height="100"></div>';
                                         }
                                         ?>
                                     </div>
