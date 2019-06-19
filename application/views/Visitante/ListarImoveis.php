@@ -14,7 +14,7 @@
                 ?>
             </div>
             <div class="container">
-                <div class="row">
+                <div class="row justify-content-center">
                         <?php
                         foreach ($imoveis as $i) {
 

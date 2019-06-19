@@ -21,30 +21,30 @@ class Imovel extends CI_Controller {
 
         $this->load->view('Administrador/Imovel/ListaImoveis', $data);
     }
-    
+
     public function listarVisitante() {
         $this->load->model('Imovel_model', 'im');
 
         $data['imoveis'] = $this->im->select();
-        
+
         $this->load->view('Header');
         $this->load->view('Visitante/ListarImoveis', $data);
         $this->load->view('Footer');
     }
-    
-    public function detalhes($id){
-        if( $id > 0){
-        $this->load->model('Imovel_model', 'im');
 
-        $data['imoveis'] = $this->im->select();
-        
-        $this->load->view('Header');
-        $this->load->view('Visitante/Detalhes', $data);
-        $this->load->view('Footer');
-        } else{
+    public function detalhes($id) {
+        if ($id > 0) {
+            $this->load->model('Imovel_model', 'im');
+
+            $data['imoveis'] = $this->im->select();
+
             $this->load->view('Header');
-        $this->load->view('Visitante/ListarImoveis', $data);
-        $this->load->view('Footer');
+            $this->load->view('Visitante/Detalhes', $data);
+            $this->load->view('Footer');
+        } else {
+            $this->load->view('Header');
+            $this->load->view('Visitante/ListarImoveis', $data);
+            $this->load->view('Footer');
         }
     }
 
@@ -68,17 +68,20 @@ class Imovel extends CI_Controller {
             $this->load->model('Bairro_model', 'bm');
             $data['bairros'] = $this->bm->getAll();
 
+            $this->load->model('Slider_model', 'sm');
+            $data['sliders'] = $this->sm->getAll();
+
             $this->load->view('Header');
-            $this->load->view('Slider');
+            $this->load->view('Slider', $data['sliders']);
             $this->load->view('Visitante/Inicio', $data);
             $this->load->view('Footer');
         } else {
 
             //if ($this->Imovel_model->getImovel($data)) {
-                redirect('Imovel/listarVisitante', $data);
-           // } else{
-                //redirect('Imovel/buscar');
-           // }
+            redirect('Imovel/listarVisitante', $data);
+            // } else{
+            //redirect('Imovel/buscar');
+            // }
         }
     }
 
@@ -92,19 +95,19 @@ class Imovel extends CI_Controller {
 
 
         if ($this->form_validation->run() == false) {
-            
+
             $this->load->model('Operador_model', 'om');
             $data['operadores'] = $this->om->getAll();
-        
+
             $this->load->model('Locador_model', 'lm');
             $data['locadores'] = $this->lm->getAll();
-            
+
             $this->load->model('Rua_model', 'rm');
             $data['ruas'] = $this->rm->getAll();
-            
+
             $this->load->model('Categoria_model', 'cam');
             $data['categorias'] = $this->cam->getAll();
-            
+
             $this->load->view('Administrador/Imovel/FormImovel', $data);
         } else {
             $data = array(
@@ -121,7 +124,7 @@ class Imovel extends CI_Controller {
                 'sala_estar' => $this->input->post('sala_estar'),
                 'numero_banheiro' => $this->input->post('numero_banheiro'),
                 'area_servico' => $this->input->post('area_servico'),
-                'cozinha' => $this->input->post('cozinha')
+                'cozinha' => $this->input->post('cozinha'),
             );
 
             $config['upload_path'] = './Imagens/';
@@ -131,13 +134,13 @@ class Imovel extends CI_Controller {
             $config['encrypt_name'] = true;
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('userfile')) {
-                
+
                 $error = $this->upload->display_errors();
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-success">' . $error . '</div>');
                 redirect('Imovel/cadastrar');
                 exit();
             } else {
-                
+
                 $data['imagem'] = $this->upload->data('file_name');
             }
 
@@ -164,26 +167,28 @@ class Imovel extends CI_Controller {
 
 
             if ($this->form_validation->run() == false) {
+                $this->load->model('Locador_model', 'lm');
+                $data['locadores'] = $this->lm->getAll();
 
                 $data['imovel'] = $this->Imovel_model->getOne($id);
 
                 $this->load->view('Administrador/Imovel/FormImovel', $data);
             } else {
                 $data = array(
-                'nomeLocador' => $this->input->post('nomeLocador'),
-                'numero_garagem' => $this->input->post('numero_garagem'),
-                'quantidade_dormitorio' => $this->input->post('quantidade_dormitorio'),
-                'preco_imovel' => $this->input->post('preco_imovel'),
-                'area_total' => $this->input->post('area_total'),
-                'area_construida' => $this->input->post('area_construida'),
-                'nomeRua' => $this->input->post('nomeRua'),
-                'nomeCategoria' => $this->input->post('nomeCategoria'),
-                'numero_residencial' => $this->input->post('numero_residencial'),
-                'sala_estar' => $this->input->post('sala_estar'),
-                'numero_banheiro' => $this->input->post('numero_banheiro'),
-                'area_servico' => $this->input->post('area_servico'),
-                'cozinha' => $this->input->post('cozinha')
-            );
+                    'nomeLocador' => $this->input->post('nomeLocador'),
+                    'numero_garagem' => $this->input->post('numero_garagem'),
+                    'quantidade_dormitorio' => $this->input->post('quantidade_dormitorio'),
+                    'preco_imovel' => $this->input->post('preco_imovel'),
+                    'area_total' => $this->input->post('area_total'),
+                    'area_construida' => $this->input->post('area_construida'),
+                    'nomeRua' => $this->input->post('nomeRua'),
+                    'nomeCategoria' => $this->input->post('nomeCategoria'),
+                    'numero_residencial' => $this->input->post('numero_residencial'),
+                    'sala_estar' => $this->input->post('sala_estar'),
+                    'numero_banheiro' => $this->input->post('numero_banheiro'),
+                    'area_servico' => $this->input->post('area_servico'),
+                    'cozinha' => $this->input->post('cozinha')
+                );
 
                 $config['upload_path'] = './Imagens/';
                 $config['allowed_types'] = 'gif|jpg|png';
@@ -211,6 +216,24 @@ class Imovel extends CI_Controller {
             }
         } else {
             redirect('Imovel/listar');
+        }
+    }
+
+    public function ocultar($id) {
+
+        if ($id > 0) {
+            $opaco = true;
+            if ($opaco == true) {
+                echo '<tr style="opacity: 0.5">';
+            } else {
+                echo '<tr>';
+            }
+            $this->load->view('Administrador/Imovel/ListaImoveis', $opaco);
+            $this->load->model('Imovel_model', 'im');
+
+            $data['imoveis'] = $this->im->getAll();
+
+            $this->load->view('Administrador/Imovel/ListaImoveis', $data);
         }
     }
 

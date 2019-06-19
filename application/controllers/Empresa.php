@@ -26,13 +26,13 @@ class Empresa extends CI_Controller {
     }
 
     public function contato() {
-        /* $this->form_validation->set_rules('email');
+        $this->form_validation->set_rules('email');
         $this->form_validation->set_rules('texto');
 
        if ($this->form_validation->run() == false) {
-           */ $this->load->view('Header');
+            $this->load->view('Header');
             $this->load->view('Visitante/Contato');
-            $this->load->view('Footer');/*
+            $this->load->view('Footer');
         } else {
             $this->email->from($this->input->post('email')); //email de quem envia a mensagem
             $this->email->subject($this->input->post('assunto')); //Assunto do email

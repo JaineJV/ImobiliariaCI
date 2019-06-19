@@ -71,7 +71,7 @@ class Slider extends CI_Controller {
                     'legenda' => $this->input->post('legenda'),
                 );
                 
-                  $config['upload_path'] = './uploads/';
+            $config['upload_path'] = './uploads/';
             $config['allowed_types'] = 'gif|jpg|png';
             $config['max_width'] = 1024;
             $config['max_height'] = 768;
