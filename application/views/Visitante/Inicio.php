@@ -1,13 +1,10 @@
 
-<figcaption></figcaption>
-</figure>
 <div class="container">
     <div class="col-md-12">
         <div class="card">
             <h5 class="card-header bg-danger text-light">BUSCAR IMÓVEL</h5>
             <div class="card-body">
-                <div action="" method="POST">
-                    <input type="hidden" name="id" value="<?= (isset($imovel)) ? $imovel->id_imovel : ''; ?>">
+                <form action="<?= $this->config->base_url(); ?>Buscar" method="POST">
                     <div class="form-row">
                         <div class="col-md-3">
                             <label for="nomeOperador">Operador</label><br>
@@ -71,7 +68,7 @@
                         <button type="submit" class="btn btn-danger col-md-3" value="Submit" style="margin-top: 10px;">BUSCAR</button>
 
                     </div>
-                </div>
+                </form>
 
             </div>
         </div>

@@ -48,43 +48,6 @@ class Imovel extends CI_Controller {
         }
     }
 
-    public function buscar() {
-        $this->form_validation->set_rules('nomeOperador', 'nomeOperador', 'required');
-        $this->form_validation->set_rules('nomeCidade', 'nomeCidade', 'required');
-        $this->form_validation->set_rules('nomeCategoria', 'nomeCategoria', 'required');
-        $this->form_validation->set_rules('nomeBairro', 'nomeBairro', 'required');
-
-        if ($this->form_validation->run() == false) {
-
-            $this->load->model('Operador_model', 'om');
-            $data['operadores'] = $this->om->getAll();
-
-            $this->load->model('Cidade_model', 'cim');
-            $data['cidades'] = $this->cim->getAll();
-
-            $this->load->model('Categoria_model', 'cam');
-            $data['categorias'] = $this->cam->getAll();
-
-            $this->load->model('Bairro_model', 'bm');
-            $data['bairros'] = $this->bm->getAll();
-
-            $this->load->model('Slider_model', 'sm');
-            $data['sliders'] = $this->sm->getAll();
-
-            $this->load->view('Header');
-            $this->load->view('Slider', $data['sliders']);
-            $this->load->view('Visitante/Inicio', $data);
-            $this->load->view('Footer');
-        } else {
-
-            //if ($this->Imovel_model->getImovel($data)) {
-            redirect('Imovel/listarVisitante', $data);
-            // } else{
-            //redirect('Imovel/buscar');
-            // }
-        }
-    }
-
     public function cadastrar() {
         $this->form_validation->set_rules('nomeLocador', 'nomeLocador', 'required');
         $this->form_validation->set_rules('preco_imovel', 'preco_imovel', 'required');

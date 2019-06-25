@@ -26,4 +26,3 @@ foreach ($imoveis as $i){
 ?>
 </div>
 </div>
-

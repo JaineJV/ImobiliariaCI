@@ -31,18 +31,6 @@ class Imovel_model extends CI_Model {
         return $query->result();
     }
 
-    public function getImovel($data = array()) {
-
-        $this->db->select('tb_imovel.*, tb_categoria.nome_categoria as nomeCategoria,'
-                . 'tb_operador.tipo_operador as nomeOperador, tb_bairro.nome_bairro as nomeBairro');
-        $this->db->join('tb_bairro', 'tb_bairro.id_bairro = tb_rua.cd_bairro', 'inner');
-        $this->db->join('tb_categoria', 'tb_categoria.id_categoria = tb_imovel.cd_categoria', 'inner');
-        $this->db->join('tb_operador', 'tb_operador.id_operador = tb_imovel.cd_operador', 'inner');
-        $this->db->where('id_imovel', $data);
-        $query = $this->db->get('tb_imovel');
-        return $query->result();
-    }
-
     public function insert($data = array()) {
 
         $this->db->insert('tb_imovel', $data);
