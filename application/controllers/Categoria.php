@@ -81,7 +81,7 @@ class Categoria extends CI_Controller {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger" role="alert">Falha ao deletar...</div>');
             }
             
-            redirect('Admin/paginar');
+            redirect('Admin/pagina');
         }
         redirect('Admin/pagina');
     }

@@ -22,6 +22,11 @@
                     </div>
                 </div>
             </div>
+            <div class="justify-content-end">
+                <a class="navbar-brand" href="<?= $this->config->base_url(); ?>Rua/cadastrar" style="margin-top: 30px;" alt="Cadastrar mais Locadores">
+                    <button type="submit" class="btn btn-outline-danger">CADASTRAR</button>
+                </a>
+            </div>
         </nav>
         
         
@@ -40,7 +45,7 @@
                 foreach ($ruas as $key => $r) {
                     echo '<tr>';
                     echo '<td scope="row">' . $r->nome_rua . '</td>';
-                    echo '<td scope="row">' . $r->cd_bairro . '</td>';
+                    echo '<td scope="row">' . $r->nomeBairro . '</td>';
                     echo '<td scope="row" style="text-align: center;">'
                     . '<a href="' . $this->config->base_url() . 'Rua/alterar/' . $r->id_rua . '" class="btn btn-danger" style="margin-right:4px;"><i class="far fa-edit"></i> Alterar </a>'
                     . '<a href="' . $this->config->base_url() . 'Rua/deletar/' . $r->id_rua . '" class="btn btn-outline-secondary"><i class="far fa-trash-alt"></i> Deletar </a></td>';

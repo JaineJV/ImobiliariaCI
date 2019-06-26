@@ -2,7 +2,7 @@
 
 $config = array(
     'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
-    'smtp_host' => 'ssl://smtp.gmail.com', 
+    'smtp_host' => 'smtp.gmail.com', 
     'smtp_port' => 465,
     'smtp_user' => 'jaine.vianna@aluno.sc.senac.br',
     'smtp_pass' => 'my_pass',

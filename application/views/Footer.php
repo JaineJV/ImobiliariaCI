@@ -14,7 +14,7 @@
         <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Imovel/listarVisitante" style="margin-left: 10px;"> Imóveis </a><br><br>
         <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Indice/mostrarVisitante" style="margin-left: 10px;"> Índices </a><br><br>
         <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Empresa/mostrarVisitante" style="margin-left: 10px;"> Sobre a Empresa </a><br><br>
-        <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Empresa/contato" style="margin-left: 10px;"> Contato </a>
+        <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>EmailController" style="margin-left: 10px;"> Contato </a>
         
     </div>
     <div class="col">
@@ -33,6 +33,8 @@
     </div>
   </div>
 </div>
+    <br><br>
+    <div class="bg-secondary text-center text-light">© 2019 Tec Sistemas. Todos os direitos reservados | Designed by Tec Sistemas</div>
 </div>
 <script type="text/javascript">
     function setaImagem() {

@@ -166,11 +166,19 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-md-5">
+                                    <div class="form-group col-md-2">
+                                        <label for="status" style="margin-left: 10px; margin-top: 10px"> Status do Imóvel: </label>
+                                        <select class="form-control" name="status" id="status">
+                                            <option value="0"> Inativo </option>
+                                            <option value="1"> Ativo </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-3">
                                         <div class="input-group md-12">
                                             <div class="custom-file">
                                                 <input type="file" name="userfile" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03">
-                                                <label class="custom-file-label" for="inputGroupFile03">Selecione uma foto para o Imóvel...</label>
+                                                <label class="custom-file-label" for="inputGroupFile03">Selecione uma foto...</label>
                                             </div>
                                         </div>
 

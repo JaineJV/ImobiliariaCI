@@ -22,6 +22,11 @@
                     </div>
                 </div>
             </div>
+            <div class="justify-content-end">
+                <a class="navbar-brand" href="<?= $this->config->base_url(); ?>Imovel/cadastrar" style="margin-top: 30px;" alt="Cadastrar mais Locadores">
+                    <button type="submit" class="btn btn-outline-danger">CADASTRAR</button>
+                </a>
+            </div>
         </nav>
 
 
@@ -49,7 +54,12 @@
                     <tbody>
                         <?php
                         foreach ($imoveis as $key => $i) {
-                            echo '<tr>';
+                            
+                            if($i->status == 0){
+                            echo '<tr style="opacity: 0.5">';
+                            } else if($i->status == 1){
+                             echo '<tr>';    
+                            }
                             echo '<td scope="row">' . $i->nomeLocador . '</td>';
                             echo '<td scope="row">' . $i->numero_garagem . '</td>';
                             echo '<td scope="row">' . $i->quantidade_dormitorio . '</td>';
@@ -66,8 +76,7 @@
                             
                             echo '<td scope="row" style="text-align: center;">'
                             . '<a href="' . $this->config->base_url() . 'Imovel/alterar/' . $i->id_imovel . '" class="btn btn-danger col-md-12" style="margin-right:4px;"><i class="far fa-edit"></i></a>'
-                            . '<a href="' . $this->config->base_url() . 'Imovel/deletar/' . $i->id_imovel . '" class="btn btn-outline-secondary col-md-12"><i class="far fa-trash-alt"></i></a>'
-                            . '<a href="' . $this->config->base_url() . 'Imovel/ocultar' . $i->id_imovel . '" class="btn btn-outline-info col-md-12" style="margin-right:4px;"> Ocultar </a></td>';
+                            . '<a href="' . $this->config->base_url() . 'Imovel/deletar/' . $i->id_imovel . '" class="btn btn-outline-secondary col-md-12"><i class="far fa-trash-alt"></i></a>';
                             echo '</tr>';
                         }
                         ?>

@@ -22,6 +22,11 @@
                     </div>
                 </div>
             </div>
+            <div class="justify-content-end">
+                <a class="navbar-brand" href="<?= $this->config->base_url(); ?>Categoria/cadastrar" style="margin-top: 30px;" alt="Cadastrar mais Locadores">
+                    <button type="submit" class="btn btn-outline-danger">CADASTRAR</button>
+                </a>
+            </div>
         </nav>
         
         

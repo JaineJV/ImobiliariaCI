@@ -55,7 +55,7 @@ class Imovel extends CI_Controller {
         $this->form_validation->set_rules('nomeRua', 'nomeRua', 'required');
         $this->form_validation->set_rules('nomeCategoria', 'nomeCategoria', 'required');
         $this->form_validation->set_rules('nomeOperador', 'nomeOperador', 'required');
-
+        $this->form_validation->set_rules('status', 'status', 'required');
 
         if ($this->form_validation->run() == false) {
 
@@ -88,6 +88,7 @@ class Imovel extends CI_Controller {
                 'numero_banheiro' => $this->input->post('numero_banheiro'),
                 'area_servico' => $this->input->post('area_servico'),
                 'cozinha' => $this->input->post('cozinha'),
+                'status' => $this->input->post('status'),
             );
 
             $config['upload_path'] = './Imagens/';
@@ -127,6 +128,7 @@ class Imovel extends CI_Controller {
             $this->form_validation->set_rules('area_total', 'area_total', 'required');
             $this->form_validation->set_rules('nomeRua', 'nomeRua', 'required');
             $this->form_validation->set_rules('nomeCategoria', 'nomeCategoria', 'required');
+            $this->form_validation->set_rules('status', 'status', 'required');
 
 
             if ($this->form_validation->run() == false) {
@@ -150,7 +152,8 @@ class Imovel extends CI_Controller {
                     'sala_estar' => $this->input->post('sala_estar'),
                     'numero_banheiro' => $this->input->post('numero_banheiro'),
                     'area_servico' => $this->input->post('area_servico'),
-                    'cozinha' => $this->input->post('cozinha')
+                    'cozinha' => $this->input->post('cozinha'),
+                    'status' => $this->input->post('status'),
                 );
 
                 $config['upload_path'] = './Imagens/';
@@ -163,7 +166,7 @@ class Imovel extends CI_Controller {
                     //Cria uma sessão com o error e redireciona
                     $error = $this->upload->display_errors();
                     $this->session->set_flashdata('mensagem', '<div class="alert alert-succsess">' . $error . '</div>');
-                    redirect('Imovel/cadastrar');
+                    redirect('Imovel/alterar');
                     exit();
                 } else {
                     $data['imagem'] = $this->upload->data('file_name');
@@ -179,24 +182,6 @@ class Imovel extends CI_Controller {
             }
         } else {
             redirect('Imovel/listar');
-        }
-    }
-
-    public function ocultar($id) {
-
-        if ($id > 0) {
-            $opaco = true;
-            if ($opaco == true) {
-                echo '<tr style="opacity: 0.5">';
-            } else {
-                echo '<tr>';
-            }
-            $this->load->view('Administrador/Imovel/ListaImoveis', $opaco);
-            $this->load->model('Imovel_model', 'im');
-
-            $data['imoveis'] = $this->im->getAll();
-
-            $this->load->view('Administrador/Imovel/ListaImoveis', $data);
         }
     }
 
