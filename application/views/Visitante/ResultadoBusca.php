@@ -16,15 +16,21 @@
             <div class="container">
                 <div class="row justify-content-center">
                         <?php
+                        if(count($imoveis)>0){
                         foreach ($imoveis as $i) {
                             if($i->status == 1){
                             echo '<button type="button" class="btn btn-light mr-4 mb-3 mt-4 shadow text-center"><img class="img-fluid mb-2" style="max-height:200px; max-width:200px;" src="' . $this->config->base_url() . 'Imagens/' . $i->imagem . '">';
                             echo '<hr>';
-                            echo '<h6 class="mb-5"> Valor: R$' . $i->preco_imovel . '</h6>';
+                            echo '<h6 "> Valor: R$' . $i->preco_imovel . '</h6>';
                             echo '<h6 class="mb-5"> Bairro: ' . $i->nomeBairro . '</h6>';
                             echo '<a href="' . $this->config->base_url() . 'Imovel/detalhes/' . $i->id_imovel . '" class="btn btn-danger"><i class="far fa-edit"></i> DETALHES </a>';
                             echo '</button>';
-                        }}
+                        }
+                        
+                            }
+                        }else{
+                            echo "Nenhum imóvel encontrado.";
+                        }
                         ?>
                 </div>
             </div>

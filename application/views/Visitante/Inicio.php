@@ -1,5 +1,4 @@
-
-<div class="container">
+<div class="container" style="margin-top: 10px">
     <div class="col-md-12">
         <div class="card">
             <h5 class="card-header bg-danger text-light">BUSCAR IMÓVEL</h5>
@@ -9,7 +8,7 @@
                         <div class="col-md-3">
                             <label for="nomeOperador">Operador</label><br>
                             <select id="nomeOperador" class="form-control" name="nomeOperador">
-                                <option selected>Selecione um Operador...</option>
+                                <option value="0" selected required="required">Selecione um Operador...</option>
                                 <?php
                                 foreach ($operadores as $key => $o) {
                                     ?> 
@@ -23,7 +22,7 @@
                         <div class="col-md-3">
                             <label for="nomeCidade">Cidade</label><br>
                             <select id="nomeCidade" class="form-control" name="nomeCidade">
-                                <option selected>Selecione uma Cidade...</option>
+                                <option value="0" selected>Selecione uma Cidade...</option>
                                 <?php
                                 foreach ($cidades as $key => $ci) {
                                     ?> 
@@ -37,7 +36,7 @@
                         <div class="col-md-3">
                             <label for="nomeCategoria">Categoria</label><br>
                             <select id="nomeCategoria" class="form-control" name="nomeCategoria">
-                                <option selected>Selecione uma Categoria...</option>
+                                <option value="0" selected>Selecione uma Categoria...</option>
                                 <?php
                                 foreach ($categorias as $key => $ca) {
                                     ?> 
@@ -51,7 +50,7 @@
                         <div class="col-md-3">
                             <label for="nomeBairro">Bairro</label><br>
                             <select id="nomeBairro" class="form-control" name="nomeBairro">
-                                <option selected>Selecione um Bairro...</option>
+                                <option value="0" selected>Selecione um Bairro...</option>
                                 <?php
                                 foreach ($bairros as $key => $b) {
                                     ?> 

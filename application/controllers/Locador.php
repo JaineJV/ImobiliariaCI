@@ -20,6 +20,7 @@ class Locador extends CI_Controller {
         $data['locadores'] = $this->lm->getAll();
 
         $this->load->view('Administrador/Locador/ListaLocadores', $data);
+        $this->load->view('Administrador/Footer');
     }
 
     public function cadastrar() {
@@ -33,6 +34,7 @@ class Locador extends CI_Controller {
         if ($this->form_validation->run() == false) {
 
             $this->load->view('Administrador/Locador/FormLocador');
+            $this->load->view('Administrador/Footer');
         } else {
             $data = array(
                     'nome_locador' => $this->input->post('nome_locador'),
@@ -68,6 +70,7 @@ class Locador extends CI_Controller {
                 $data['locador'] = $this->Locador_model->getOne($id);
 
                 $this->load->view('Administrador/Locador/FormLocador', $data);
+                $this->load->view('Administrador/Footer');
             } else {
                 $data = array(
                     'nome_locador' => $this->input->post('nome_locador'),

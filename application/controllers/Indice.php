@@ -21,6 +21,7 @@ class Indice extends CI_Controller {
         $data['indices'] = $this->idm->getAll();
 
         $this->load->view('Administrador/Indice/ListaIndices', $data);
+        $this->load->view('Administrador/Footer');
     }
     
     public function mostrarVisitante(){
@@ -29,8 +30,8 @@ class Indice extends CI_Controller {
         $data['indices'] = $this->idm->getBD();
                 $data['header'] = $this->idm->getHeader();
 
-        $this->load->view('Header');
-        $this->load->view('Visitante/Indice', $data);
+        $this->load->view('Header', $data);
+        $this->load->view('Visitante/Indice');
         $this->load->view('Footer');
     }
 
@@ -43,6 +44,7 @@ class Indice extends CI_Controller {
         if ($this->form_validation->run() == false) {
 
             $this->load->view('Administrador/Indice/FormIndice');
+            $this->load->view('Administrador/Footer');
         } else {
             $data = array(
                 'tipo' => $this->input->post('tipo'),
@@ -74,6 +76,7 @@ class Indice extends CI_Controller {
                 $data['indice'] = $this->Indice_model->getOne($id);
 
                 $this->load->view('Administrador/Indice/FormIndice', $data);
+                $this->load->view('Administrador/Footer');
             } else {
                 $data = array(
                 'tipo' => $this->input->post('tipo'),

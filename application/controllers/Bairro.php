@@ -21,6 +21,7 @@ class Bairro extends CI_Controller {
         $data['bairros'] = $this->bm->getAll();
 
         $this->load->view('Administrador/Bairro/ListaBairros', $data);
+        $this->load->view('Administrador/Footer');
     }
 
     public function cadastrar() {
@@ -33,6 +34,7 @@ class Bairro extends CI_Controller {
             $data['cidades'] = $this->cm->getAll();
 
             $this->load->view('Administrador/Bairro/FormBairro', $data);
+            $this->load->view('Administrador/Footer');
         } else {
             $data = array(
                 'cd_cidade' => $this->input->post('cd_cidade'),
@@ -62,6 +64,7 @@ class Bairro extends CI_Controller {
                 $data['bairro'] = $this->Bairro_model->getOne($id);
 
                 $this->load->view('Administrador/Bairro/FormBairro', $data);
+                $this->load->view('Administrador/Footer');
             } else {
                 $data = array(
                     'cd_cidade' => $this->input->post('cd_cidade'),

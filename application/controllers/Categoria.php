@@ -21,6 +21,7 @@ class Categoria extends CI_Controller {
         $data['categorias'] = $this->cam->getAll();
         
         $this->load->view('Administrador/Categoria/ListaCategorias', $data);
+        $this->load->view('Administrador/Footer');
     }
 
     public function cadastrar() {
@@ -29,6 +30,7 @@ class Categoria extends CI_Controller {
         if ($this->form_validation->run() == false) {
             
             $this->load->view('Administrador/Categoria/FormCategoria');
+            $this->load->view('Administrador/Footer');
         } else {
             $data = array(
                 'nome_categoria' => $this->input->post('nome_categoria')
@@ -54,6 +56,7 @@ class Categoria extends CI_Controller {
                 $data['categoria'] = $this->Categoria_model->getOne($id);
                 
                 $this->load->view('Administrador/Categoria/FormCategoria', $data);
+                $this->load->view('Administrador/Footer');
             } else {
                 $data = array(
                     'nome_categoria' => $this->input->post('nome_categoria')

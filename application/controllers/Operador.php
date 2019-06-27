@@ -21,6 +21,7 @@ class Operador extends CI_Controller {
         $data['operadores'] = $this->om->getAll();
         
         $this->load->view('Administrador/Operador/ListaOperadores', $data);
+        $this->load->view('Administrador/Footer');
     }
 
     public function cadastrar() {
@@ -29,6 +30,7 @@ class Operador extends CI_Controller {
         if ($this->form_validation->run() == false) {
 
             $this->load->view('Administrador/Operador/FormOperador');
+            $this->load->view('Administrador/Footer');
         } else {
             $data = array(
                 'tipo_operador' => $this->input->post('tipo_operador')
@@ -54,6 +56,7 @@ class Operador extends CI_Controller {
                 $data['operador'] = $this->Operador_model->getOne($id);
                 
                 $this->load->view('Administrador/Operador/FormOperador', $data);
+                $this->load->view('Administrador/Footer');
             } else {
                 $data = array(
                     'tipo_operador' => $this->input->post('tipo_operador')

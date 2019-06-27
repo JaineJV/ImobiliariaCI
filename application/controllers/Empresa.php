@@ -31,6 +31,7 @@ class Empresa extends CI_Controller {
         $summernote['summernote'] = $this->Empresa_model->getOne(0);
 
         $this->load->view('Administrador/Empresa/VisualizarTexto', $summernote);
+        $this->load->view('Administrador/Footer');
     }
 
     public function cadastrar() {
@@ -40,6 +41,7 @@ class Empresa extends CI_Controller {
         if ($this->form_validation->run() == false) {
             $summernote['summernote'] = $this->Empresa_model->getOne(0);
             $this->load->view('Administrador/Empresa/EditarInformacao', $summernote);
+            $this->load->view('Administrador/Footer');
         } else {
 
             $data = array(
@@ -66,6 +68,7 @@ class Empresa extends CI_Controller {
                 $data['empresa'] = $this->Empresa_model->getOne($id);
 
                 $this->load->view('Administrador/Empresa/EditarInformacao', $data);
+                $this->load->view('Administrador/Footer');
             } else {
                 $data = array(
                     'summernote' => $this->input->post('summernote')

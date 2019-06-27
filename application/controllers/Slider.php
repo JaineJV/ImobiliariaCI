@@ -17,6 +17,7 @@ class Slider extends CI_Controller {
         $data['sliders'] = $this->Slider_model->getAll();
 
         $this->load->view('Administrador/Slider/ListaSliders', $data);
+        $this->load->view('Administrador/Footer');
         
     }
     
@@ -26,6 +27,7 @@ class Slider extends CI_Controller {
 
         if ($this->form_validation->run() == false) {
             $this->load->view('Administrador/Slider/FormSlider');
+            $this->load->view('Administrador/Footer');
         } else {
             $data = array(
                 'legenda' => $this->input->post('legenda'),
@@ -33,8 +35,8 @@ class Slider extends CI_Controller {
 
             $config['upload_path'] = './uploads/';
             $config['allowed_types'] = 'gif|jpg|png';
-            $config['max_width'] = 1024;
-            $config['max_height'] = 768;
+            $config['max_width'] = 1600;
+            $config['max_height'] = 800;
             $config['encrypt_name'] = true;
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('userfile')) {
@@ -65,6 +67,7 @@ class Slider extends CI_Controller {
                 $data['slider'] = $this->Slider_model->getOne($id);
 
                 $this->load->view('Administrador/Slider/FormSlider', $data);
+                $this->load->view('Administrador/Footer');
                 
             } else {
                 $data = array(
@@ -73,8 +76,8 @@ class Slider extends CI_Controller {
                 
             $config['upload_path'] = './uploads/';
             $config['allowed_types'] = 'gif|jpg|png';
-            $config['max_width'] = 1024;
-            $config['max_height'] = 768;
+            $config['max_width'] = 1600;
+            $config['max_height'] = 800;
             $config['encrypt_name'] = true;
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('userfile')) {
@@ -103,7 +106,7 @@ class Slider extends CI_Controller {
         If ($id > 0) {
             
             unlink('./uploads/' . $data['imagem']);
-            if ($this->Equipe_model->delete($id)) {
+            if ($this->Slider_model->delete($id)) {
                 $this->session->set_flashdata('mensagem', 'Imagem deletada com sucesso!!!');
             } else {
                 $this->session->set_flashdata('mensagem', 'Erro ao deletar imagem...');

@@ -21,6 +21,7 @@ class Cidade extends CI_Controller {
         $data['cidades'] = $this->cm->getAll();
         
         $this->load->view('Administrador/Cidade/ListaCidades', $data);
+        $this->load->view('Administrador/Footer');
     }
 
     public function cadastrar() {
@@ -29,6 +30,7 @@ class Cidade extends CI_Controller {
         if ($this->form_validation->run() == false) {
             
             $this->load->view('Administrador/Cidade/FormCidade');
+            $this->load->view('Administrador/Footer');
         } else {
             $data = array(
                 'nome_cidade' => $this->input->post('nome_cidade')
@@ -54,6 +56,7 @@ class Cidade extends CI_Controller {
                 $data['cidade'] = $this->Cidade_model->getOne($id);
                 
                 $this->load->view('Administrador/Cidade/FormCidade', $data);
+                $this->load->view('Administrador/Footer');
             } else {
                 $data = array(
                     'nome_cidade' => $this->input->post('nome_cidade')

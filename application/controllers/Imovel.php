@@ -20,6 +20,7 @@ class Imovel extends CI_Controller {
         $data['imoveis'] = $this->im->getAll();
 
         $this->load->view('Administrador/Imovel/ListaImoveis', $data);
+        $this->load->view('Administrador/Footer');
     }
 
     public function listarVisitante() {
@@ -72,6 +73,7 @@ class Imovel extends CI_Controller {
             $data['categorias'] = $this->cam->getAll();
 
             $this->load->view('Administrador/Imovel/FormImovel', $data);
+            $this->load->view('Administrador/Footer');
         } else {
             $data = array(
                 'cd_locador' => $this->input->post('nomeLocador'),
@@ -133,11 +135,12 @@ class Imovel extends CI_Controller {
 
             if ($this->form_validation->run() == false) {
                 $this->load->model('Locador_model', 'lm');
-                $data['locadores'] = $this->lm->getAll();
+                $data['locador'] = $this->lm->getAll();
 
                 $data['imovel'] = $this->Imovel_model->getOne($id);
 
                 $this->load->view('Administrador/Imovel/FormImovel', $data);
+                $this->load->view('Administrador/Footer');
             } else {
                 $data = array(
                     'nomeLocador' => $this->input->post('nomeLocador'),

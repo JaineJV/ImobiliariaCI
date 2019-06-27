@@ -21,6 +21,7 @@ class Rua extends CI_Controller {
         $data['ruas'] = $this->rm->getAll();
 
         $this->load->view('Administrador/Rua/ListaRuas', $data);
+        $this->load->view('Administrador/Footer');
     }
 
     public function cadastrar() {
@@ -33,6 +34,7 @@ class Rua extends CI_Controller {
             $data['bairros'] = $this->bm->getAll();
             
             $this->load->view('Administrador/Rua/FormRua', $data);
+            $this->load->view('Administrador/Footer');
             
         } else {
             $data = array(
@@ -61,6 +63,7 @@ class Rua extends CI_Controller {
                 $data['rua'] = $this->Rua_model->getOne($id);
 
                 $this->load->view('Administrador/Rua/FormRua', $data);
+                $this->load->view('Administrador/Footer');
             } else {
                 $data = array(
                     'nome_rua' => $this->input->post('nome_rua')

@@ -1,8 +1,8 @@
-<div id="footer" class=" bg-light">
+<div id="footer" class=" bg-light" style="margin-top: 10px;">
     <div class="container">
   <div class="row">
       <div class="col"><br>
-        <img src="../ImobiliariaCI/Imagens/logo.png" alt=""/>
+        <img src="<?= base_url('Imagens/logo.png') ?>" alt=""/>
         <h1 class="text-danger" style="margin-top: 50px;">Imobiliária</h1> <h1 class="text-danger" style="margin-left: 120px;">Colinas</h1>
     </div>
     <div class="col">
@@ -32,13 +32,13 @@
         <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Imovel/listar" style="margin-left: 10px;"> Imóvel </a><br><br>
         <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Slider/listar" style="margin-left: 10px;"> Slider </a><br><br>
         <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Indice/listar" style="margin-left: 10px;"> Índices </a><br><br>
-        <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Empresa/listar" style="margin-left: 10px;"> Sobre a Empresa </a>
+        <a class="text-center text-danger" href="<?= $this->config->base_url(); ?>Empresa/mostrar" style="margin-left: 10px;"> Sobre a Empresa </a>
       </div>
   </div>
         
 </div>
     <br><br>
-    <div class="bg-secondary text-center text-light">© 2019 Tec Sistemas. Todos os direitos reservados | Designed by Tec Sistemas</div>
+    <div class="bg-secondary text-center text-light">© 2019 TI Senac. Todos os direitos reservados | Designed by <a href="#" class="text-light">TI Senac</a></div>
 </div>
 
 

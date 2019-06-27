@@ -24,7 +24,7 @@
             <div class="container">
                 <div class="row col-12">
                     <div class="col-md-4">
-                        <a class="navbar-brand" href="<?= $this->config->base_url(); ?>Admin">
+                        <a class="navbar-brand" href="<?= $this->config->base_url(); ?>Admin/pagina">
                            <h2> <i class="fas fa-user-cog" style="color: red;"></i>
                                Administrador </h2>
                         </a>
