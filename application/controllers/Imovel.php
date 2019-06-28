@@ -37,7 +37,7 @@ class Imovel extends CI_Controller {
         if ($id > 0) {
             $this->load->model('Imovel_model', 'im');
 
-            $data['imoveis'] = $this->im->select();
+            $data['imovel'] = $this->im->detalhe($id);
 
             $this->load->view('Header');
             $this->load->view('Visitante/Detalhes', $data);
@@ -102,7 +102,7 @@ class Imovel extends CI_Controller {
             if (!$this->upload->do_upload('userfile')) {
 
                 $error = $this->upload->display_errors();
-                $this->session->set_flashdata('mensagem', '<div class="alert alert-success">' . $error . '</div>');
+                $this->session->set_flashdata('mensagem', '<div class="alert alert-danger">' . $error . '</div>');
                 redirect('Imovel/cadastrar');
                 exit();
             } else {
@@ -126,53 +126,60 @@ class Imovel extends CI_Controller {
         if ($id > 0) {
 
             $this->form_validation->set_rules('nomeLocador', 'nomeLocador', 'required');
-            $this->form_validation->set_rules('preco_imovel', 'preco_imovel', 'required');
-            $this->form_validation->set_rules('area_total', 'area_total', 'required');
-            $this->form_validation->set_rules('nomeRua', 'nomeRua', 'required');
-            $this->form_validation->set_rules('nomeCategoria', 'nomeCategoria', 'required');
             $this->form_validation->set_rules('status', 'status', 'required');
 
 
             if ($this->form_validation->run() == false) {
-                $this->load->model('Locador_model', 'lm');
-                $data['locador'] = $this->lm->getAll();
 
                 $data['imovel'] = $this->Imovel_model->getOne($id);
+
+                $this->load->model('Operador_model', 'om');
+                $data['operadores'] = $this->om->getAll();
+
+                $this->load->model('Locador_model', 'lm');
+                $data['locadores'] = $this->lm->getAll();
+
+                $this->load->model('Rua_model', 'rm');
+                $data['ruas'] = $this->rm->getAll();
+
+                $this->load->model('Categoria_model', 'cam');
+                $data['categorias'] = $this->cam->getAll();
 
                 $this->load->view('Administrador/Imovel/FormImovel', $data);
                 $this->load->view('Administrador/Footer');
             } else {
                 $data = array(
-                    'nomeLocador' => $this->input->post('nomeLocador'),
+                    'cd_locador' => $this->input->post('nomeLocador'),
                     'numero_garagem' => $this->input->post('numero_garagem'),
                     'quantidade_dormitorio' => $this->input->post('quantidade_dormitorio'),
                     'preco_imovel' => $this->input->post('preco_imovel'),
                     'area_total' => $this->input->post('area_total'),
                     'area_construida' => $this->input->post('area_construida'),
-                    'nomeRua' => $this->input->post('nomeRua'),
-                    'nomeCategoria' => $this->input->post('nomeCategoria'),
+                    'cd_rua' => $this->input->post('nomeRua'),
+                    'cd_categoria' => $this->input->post('nomeCategoria'),
                     'numero_residencial' => $this->input->post('numero_residencial'),
                     'sala_estar' => $this->input->post('sala_estar'),
                     'numero_banheiro' => $this->input->post('numero_banheiro'),
                     'area_servico' => $this->input->post('area_servico'),
                     'cozinha' => $this->input->post('cozinha'),
-                    'status' => $this->input->post('status'),
+                    'status' => $this->input->post('status')
                 );
-
-                $config['upload_path'] = './Imagens/';
-                $config['allowed_types'] = 'gif|jpg|png';
-                $config['max_width'] = 1024;
-                $config['max_height'] = 768;
-                $config['encrypt_name'] = true;
-                $this->load->library('upload', $config);
-                if (!$this->upload->do_upload('userfile')) {
-                    //Cria uma sessão com o error e redireciona
-                    $error = $this->upload->display_errors();
-                    $this->session->set_flashdata('mensagem', '<div class="alert alert-succsess">' . $error . '</div>');
-                    redirect('Imovel/alterar');
-                    exit();
-                } else {
-                    $data['imagem'] = $this->upload->data('file_name');
+                if (!empty($_FILES['userfile']['tmp_name'])) {
+                    $config['upload_path'] = './Imagens/';
+                    $config['allowed_types'] = 'gif|jpg|png';
+                    $config['max_width'] = 1024;
+                    $config['max_height'] = 768;
+                    $config['encrypt_name'] = true;
+                    $this->load->library('upload', $config);
+                    if (!$this->upload->do_upload('userfile')) {
+                        //Cria uma sessão com o error e redireciona
+                        $error = $this->upload->display_errors();
+                        $this->session->set_flashdata('mensagem', '<div class="alert alert-danger">' . $error . '</div>');
+                        redirect('Imovel/alterar/' . $id);
+                        exit();
+                    } else {
+                        $data['imagem'] = $this->upload->data('file_name');
+                    }
                 }
 
                 if ($this->Imovel_model->update($id, $data)) {

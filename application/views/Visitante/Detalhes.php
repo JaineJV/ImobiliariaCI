@@ -1,14 +1,15 @@
 <div class="container ">
-    <h2 class="text-danger"> Sobre o Imóvel </h2>
+    <h2 class="text-danger" style="margin-top: 10px;"> Sobre o Imóvel </h2>
     <hr class="bg-info">
 <div class="row col-12">
 
 <?php
-foreach ($imoveis as $i){
+foreach ($imovel as $i){
     if( $i->id_imovel){
     echo '<div class="col-md-6">';
     echo '<h4 class="text-danger"> Características do Imóvel </h4>';
     echo '<hr>';
+    echo '<p> Código: '.$i->id_imovel.'</p>';
     echo '<p> Categoria: '.$i->nomeCategoria.'</p>';
     echo '<p> Operador: '.$i->nomeOperador.'</p>';
     echo '<p> Banheiro: '.$i->numero_banheiro.'</p>';

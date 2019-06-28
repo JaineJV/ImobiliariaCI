@@ -35,6 +35,7 @@
                 <table class="table table-bordered bg-white text-center" style="margin-top: 10px;">
                     <thead  class="thead-light">
                         <tr>
+                            <th scope="col"> Código </th>
                             <th scope="col"> Locador </th>
                             <th scope="col"> Garagem </th>
                             <th scope="col"> Dormitórios </th>
@@ -58,8 +59,8 @@
                             if($i->status == 0){
                             echo '<tr style="opacity: 0.5">';
                             } else if($i->status == 1){
-                             echo '<tr>';    
-                            }
+                            echo '<tr>';}
+                            echo '<td scope="row">' . $i->id_imovel . '</td>';
                             echo '<td scope="row">' . $i->nomeLocador . '</td>';
                             echo '<td scope="row">' . $i->numero_garagem . '</td>';
                             echo '<td scope="row">' . $i->quantidade_dormitorio . '</td>';

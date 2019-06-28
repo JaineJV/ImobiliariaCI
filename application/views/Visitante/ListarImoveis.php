@@ -1,5 +1,5 @@
 <div class="container">
-    <h2 class="text-danger"> Imóveis </h2>
+    <h2 class="text-danger" style="margin-top: 10px;"> Imóveis </h2>
     <hr class="bg-info">
 </div>
 

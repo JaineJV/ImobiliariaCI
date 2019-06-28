@@ -1,5 +1,5 @@
 <div class="container">
-    <h2 class="text-danger"> Resultado da Busca </h2>
+    <h2 class="text-danger" style="margin-top:10px;"> Resultado da Busca </h2>
     <hr class="bg-info">
 </div>
 
@@ -29,7 +29,7 @@
                         
                             }
                         }else{
-                            echo "Nenhum imóvel encontrado.";
+                            echo "<div class='alert alert-warning'>Nenhum imóvel encontrado.</div>";
                         }
                         ?>
                 </div>
